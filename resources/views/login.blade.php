@@ -9,13 +9,22 @@
     </head>
     <body>
         <div class="center">
-            <form method="post">
+            <form action="{{route('login')}}" method="post">
+                @csrf
                 <h1>Log in</h1>
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" />
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" />
-                <a href="">Lupa Password?</a>
+                @if ($errors->any())
+                    <div style="color: red; border-radius: 10px;border: red solid 1px;">
+                        <ul>
+                            @foreach ($errors->all() as $item)
+                                <li style="list-style-type: none; padding-left: 0">{{ $item }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <button type="submit">Log in</button>
             </form>
         </div>
