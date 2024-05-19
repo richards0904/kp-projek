@@ -41,7 +41,7 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Pesanan
                         </a>
-                        <a class="nav-link" href="logout">
+                        <a class="nav-link" href="/logout">
                             Log Out
                         </a>
                     </div>

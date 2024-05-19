@@ -20,26 +20,26 @@ class DatabaseSeeder extends Seeder
             [
                 'nama' => 'Mas Admin',
                 'email' => 'admin@gmail.com',
-                'password' => 'admin123!',
+                'password' => bcrypt('admin123!'),
                 'jabatan' => 'admin'
             ],
             [
                 'nama' => 'Mas Owner',
                 'email' => 'owner@gmail.com',
-                'password' => 'owner123!',
+                'password' => bcrypt('owner123!'),
                 'jabatan' => 'owner'
             ],
             [
                 'nama' => 'Mas Gudang',
                 'email' => 'gudang@gmail.com',
-                'password' => 'gudang123!',
-                'jabatan' => 'Kepala Gudang'
+                'password' => bcrypt('gudang123!'),
+                'jabatan' => 'kepala Gudang'
             ],
             [
                 'nama' => 'Mas Sales',
                 'email' => 'sales@gmail.com',
-                'password' => 'sales123!',
-                'jabatan' => 'Sales'
+                'password' => bcrypt('sales123!'),
+                'jabatan' => 'sales'
             ]
         ];
 
