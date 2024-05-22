@@ -14,9 +14,9 @@ class UserAccess
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, $jabatan)
+    public function handle(Request $request, Closure $next, ...$jabatan)
     {
-        if(auth()->user()->jabatan == $jabatan){
+        if (in_array(auth()->user()->jabatan, $jabatan)) {
             return $next($request);
         }
         return response()->json(['Anda tidak mempunyai izin untuk mengakses halaman ini.']);

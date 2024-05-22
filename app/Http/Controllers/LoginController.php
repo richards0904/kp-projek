@@ -27,10 +27,10 @@ class LoginController extends Controller
 
         if (Auth::attempt($infologin)) {
             // echo('Sukses');
-            if (Auth::user()->jabatan == 'admin') {
+            if (Auth::user()->jabatan == 'kepala gudang') {
                 return redirect()->route('stok.barang');
-            } else if (Auth::user()->jabatan == 'owner') {
-                return redirect()->route('kelola.admin');
+            } else if (Auth::user()->jabatan == 'admin') {
+                return redirect()->route('stok.barang');
             } else if (Auth::user()->jabatan == 'sales') {
                 return redirect()->route('kelola.admin');
             } else {
@@ -47,14 +47,14 @@ class LoginController extends Controller
         return redirect('');
     }
 
-    public function redirectTo()
-{
-    $role = auth()->user()->role;
+//     public function redirectTo()
+// {
+//     $role = auth()->user()->role;
 
-    if ($role === 'admin') {
-        return redirect(route('stok.barang'));
-    }
+//     if ($role === 'admin') {
+//         return redirect(route('stok.barang'));
+//     }
 
-    return redirect(route('user'));
-}
+//     return redirect(route('user'));
+// }
 }

@@ -24,7 +24,20 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return Redirect::back();
+                $user = Auth::guard($guard)->user();
+                // Meredirect
+                // switch ($user->jabatan) {
+                //     case 'admin':
+                //         return redirect('/admin/dashboard');
+                //     case 'kepala gudang':
+                //         return redirect('/kepala-gudang/dashboard');
+                //     case 'owner':
+                //         return redirect('/owner/dashboard');
+                //     case 'sales':
+                //         return redirect('/sales/dashboard');
+                //     default:
+                //         return redirect('/home'); // Fallback for unexpected roles
+                // }
             }
         }
 

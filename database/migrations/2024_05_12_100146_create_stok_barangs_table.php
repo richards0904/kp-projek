@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('stok_barangs', function (Blueprint $table) {
-            $table->id('idBarang');
+            $table->string('idBarang',10)->unique();
             $table->string('namaBarang', 25);
-            $table->string('jenisBarang', 100);
+            $table->enum('jenisBarang', ["Kecap", "Sambal", "Tomat", "Sardine", "Terasi", "Syrup", "Ready to Drink", "NPD Product"]);
             $table->integer('hargaBarang');
             $table->integer('stokBarang');
         });

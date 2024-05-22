@@ -13,5 +13,7 @@ class StokBarang extends Model
     public $timestamps = false;
     protected $table = "stok_barangs";
     protected $primaryKey = "idBarang";
-    protected $fillable = ['namaBarang', 'jenisBarang', 'stokBarang', 'hargaBarang'];
+    public $incrementing = false;
+    protected $keyType = 'string';
+    protected $fillable = ['idBarang','namaBarang', 'jenisBarang', 'stokBarang', 'hargaBarang'];
 }

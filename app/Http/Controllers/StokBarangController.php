@@ -17,16 +17,22 @@ class StokBarangController extends Controller
     public function inputStock(Request $request)
     {
         $request->validate([
+            'idBarang' => 'required',
             'namaBarang' => 'required',
             'jenisBarang' => 'required',
             'hargaBarang' => 'required',
         ]);
+        try{
         StokBarang::create([
+            'idBarang' => $request->idBarang,
             'namaBarang' => $request->namaBarang,
             'jenisBarang' => $request->jenisBarang,
             'hargaBarang' => $request->hargaBarang,
             'stokBarang' => 0
         ]);
+        }catch(\Exception $e){
+            return redirect()->route('stok.barang')->with('pesan', 'Kode Barang yang anda masukan sudah pernah dibuat.') ;
+        }
         return redirect()->route('stok.barang');
     }
 
@@ -35,7 +41,8 @@ class StokBarangController extends Controller
         $editStok = StokBarang::where('idBarang', $request->idBarang)
             ->update([
                 'namaBarang' => $request->editNamaBarang,
-                'jenisBarang' => $request->editJenisBarang
+                'jenisBarang' => $request->editJenisBarang,
+                'hargaBarang' => $request->editHargaBarang
             ]);
         return redirect()->route('stok.barang');
     }
