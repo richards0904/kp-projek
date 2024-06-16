@@ -1,0 +1,10 @@
+/* Mulai baru Manual */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.button-group .btn {
+    flex: 0 0 46%; /* Mengatur lebar tombol menjadi sekitar setengah dari baris */
+    margin: 2%; /* Memberikan margin agar tombol tidak menempel */
+}

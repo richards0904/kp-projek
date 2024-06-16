@@ -16,4 +16,10 @@ class StokBarang extends Model
     public $incrementing = false;
     protected $keyType = 'string';
     protected $fillable = ['idBarang','namaBarang', 'jenisBarang', 'stokBarang', 'hargaBarang'];
+
+    // untuk mendeklarasikan hubungan many to many tabel pesanan dan stok barang
+    public function detailPesanans()
+    {
+        return $this->hasMany(DetailPesanan::class, 'idBarang', 'idBarang');
+    }
 }

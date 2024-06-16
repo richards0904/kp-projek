@@ -19,6 +19,7 @@ return new class extends Migration
             $table->enum('jenisBarang', ["Kecap", "Sambal", "Tomat", "Sardine", "Terasi", "Syrup", "Ready to Drink", "NPD Product"]);
             $table->integer('hargaBarang');
             $table->integer('stokBarang');
+            $table->primary('idBarang');
         });
     }
 

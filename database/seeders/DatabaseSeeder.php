@@ -18,25 +18,33 @@ class DatabaseSeeder extends Seeder
     {
         $userData = [
             [
-                'nama' => 'Mas Admin',
+                'namaPegawai' => 'Mas Admin',
+                'noTelpPegawai' => '081234567891',
+                'alamatPegawai' => 'Jln pesangon',
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('admin123!'),
                 'jabatan' => 'admin'
             ],
             [
-                'nama' => 'Mas Owner',
-                'email' => 'owner@gmail.com',
-                'password' => bcrypt('owner123!'),
-                'jabatan' => 'owner'
+                'namaPegawai' => 'Mas Super Admin',
+                'noTelpPegawai' => '081234567890',
+                'alamatPegawai' => 'Jln Lemon',
+                'email' => 'super@gmail.com',
+                'password' => bcrypt('super123!'),
+                'jabatan' => 'super admin'
             ],
             [
-                'nama' => 'Mas Gudang',
+                'namaPegawai' => 'Mas Gudang',
+                'noTelpPegawai' => '081919191912',
+                'alamatPegawai' => 'Jln. ponli',
                 'email' => 'gudang@gmail.com',
                 'password' => bcrypt('gudang123!'),
-                'jabatan' => 'kepala Gudang'
+                'jabatan' => 'kepala gudang'
             ],
             [
-                'nama' => 'Mas Sales',
+                'namaPegawai' => 'Mas Sales',
+                'noTelpPegawai' => '087171711717',
+                'alamatPegawai' => 'Jln Apel',
                 'email' => 'sales@gmail.com',
                 'password' => bcrypt('sales123!'),
                 'jabatan' => 'sales'
