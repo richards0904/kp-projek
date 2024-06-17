@@ -15,11 +15,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('pesanans', function (Blueprint $table) {
-            $table->id('idPesanan');
-            $table->unsignedBigInteger('idToko');
+            $table->string('idPesanan')->primary();
+            $table->string('idToko');
             $table->unsignedBigInteger('idPegawai');
             $table->date('tglPesanan')->default(DB::raw('CURRENT_TIMESTAMP'));;
-            $table->enum('status', ['Dikonfirmasi', 'Sedang Diproses', 'Dibatalkan'])->default('Sedang Diproses');
+            $table->enum('status', ['Dikonfirmasi', 'Sedang Diproses'])->default('Sedang Diproses');
             $table->integer('total');
             $table->foreign('idPegawai')->references('idPegawai')->on('users')->onDelete('cascade');
             $table->foreign('idToko')->references('idToko')->on('tokos')->onDelete('cascade');

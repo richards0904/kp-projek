@@ -87,14 +87,15 @@
                                             </div>
                                             <!-- Edit Modal body -->
                                             <div class="modal-body">
-                                                <form method="post" action="{{ route('edit.pesanan.post')}}">
+                                                <form method="post" action="{{ route('edit.pesanan.post')}}" autocomplete="off">
                                                     @csrf
                                                     <div class="modal-body">
-                                                        <select id="editIdToko" name="idToko" class="form-select" required>
-                                                            @foreach ($tokoAll as $toko)
-                                                                <option value="{{ $toko->idToko }}">{{ $toko->namaToko }}</option>
+                                                        <input type="text" id="idToko" name="idToko" list="kodeToko" class="form-select"  placeholder="Ketik Nama Toko" value="{{$pesanans->namaToko}}">
+                                                        <datalist id="kodeToko">
+                                                            @foreach ($tokoAll as $tokos)
+                                                                <option value="{{ $tokos->idToko }}" data-namaToko="{{ $tokos->namaToko }}">{{ $tokos->namaToko }}</option>
                                                             @endforeach
-                                                        </select>
+                                                        </datalist>
                                                         <br>
                                                         <input type="hidden" name="editIdPesanan" value="{{ $pesanans->idPesanan }}">
                                                         <button type="submit" class="btn btn-primary"
@@ -179,7 +180,7 @@
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form autocomplete="off" action="{{route('tambah.pesanan.post')}}" method="post" enctype="multipart/form-data">
+                    <form autocomplete="off" action="{{route('tambah.pesanan.post')}}" method="post" enctype="multipart/form-data" name="formTambahPesan">
                         @csrf
                         <div class="modal-body">
                             <input type="text" id="idToko" name="idToko" list="kodeToko" class="form-select"  placeholder="Ketik Nama Toko">

@@ -11,7 +11,7 @@ use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Validator;
 
 class PesananController extends Controller
 {
@@ -49,6 +49,15 @@ class PesananController extends Controller
 
     public function buatPesanan(Request $request)
     {
+    $validator = Validator::make($request->all(), [
+            'idToko' => 'required|exists:tokos,idToko',
+            'idPegawai' => 'required|exists:users,idPegawai',
+        ]);
+
+        // Jika validasi gagal
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput()->with('pesan', 'Toko yang dimasukan tidak valid');
+        }
         Pesanan::create([
             'idToko' => $request->idToko,
             'idPegawai' => $request->idPegawai,
@@ -68,7 +77,7 @@ class PesananController extends Controller
 
     public function hapusPesanan(Request $request)
     {
-        $hapusPesanan = Pesanan::where('idPesanan', $request->hapusIdPesanan)
+        $hapusPesanan = Pesanan::where('idPesanan', $request->idPesanan)
             ->delete();
         return redirect()->route('pesanan.barang');
     }
