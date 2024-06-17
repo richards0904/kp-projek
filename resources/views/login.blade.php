@@ -5,13 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>Login</title>
-        <link rel="stylesheet" href="css/login.css"">
+        <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     </head>
     <body>
         <div class="center">
             <form action="{{route('login')}}" method="post">
                 @csrf
-                <h1>Log in</h1>
+                <div class="tengah"><img class="logo" src="{{ asset('gambar/logo.png') }}" alt="logo"></div>
+                <h2>Log in</h2>
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" />
                 <label for="password">Password</label>

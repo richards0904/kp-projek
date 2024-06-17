@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BarangKeluar;
 use App\Models\BarangMasuk;
 use App\Models\StokBarang;
 use Illuminate\Http\Request;
@@ -86,4 +87,13 @@ class BarangMasukController extends Controller
             return redirect()->route('barang.masuk');
         }
     }
+    public function tampilBarangKeluar(){
+    $stokBarangKeluar = BarangKeluar::select('*')
+            ->join('stok_barangs', 'barang_keluars.idBarang', '=', 'stok_barangs.idBarang')
+            ->get();
+        $stokBarang = StokBarang::select('*')
+            ->get();
+        return view('keluar', compact('stokBarangKeluar', 'stokBarang'));
+    }
+
 }

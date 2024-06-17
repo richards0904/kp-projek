@@ -71,7 +71,7 @@
                                                 <form method="post" action="{{ route('edit.barang.masuk') }}">
                                                     @csrf
                                                     <div class="modal-body">
-                                                        <input type=text value='{{ $masuk->jenisBarang }}'
+                                                        <input type=text value='{{ $masuk->namaBarang }}'
                                                             class='form-control' disabled>
                                                         <br>
                                                         <input type="number" name="qtyMasuk"
@@ -104,7 +104,7 @@
                                                 <form method="post" action="{{ route('hapus.barang.masuk') }}">
                                                     @csrf
                                                     <div class="modal-body">
-                                                        <p style="margin-bottom: 5px">Apakah anda yakin ingin menghapus {{ $masuk->jenisBarang }} ?</p>
+                                                        <p style="margin-bottom: 5px">Apakah anda yakin ingin menghapus {{ $masuk->namaBarang }} ?</p>
                                                         <span class="text-danger" style="display: block; margin-bottom: 15px" >(Setelah dihapus data tidak dapat dikembalikan)</span>
                                                         <input type="hidden" name="idBarangMasuk"
                                                             value="{{ $masuk->idBarangMasuk }}">
@@ -141,18 +141,17 @@
                         @csrf
                         <div class="modal-body">
                             <div>
-                                <input type="text" name="idBarang" list="kodeBarang" class="form-select" oninput="this.value = this.value.toUpperCase()" placeholder="ID Barang">
+                                <input type="text" id="idBarang" name="idBarang" list="kodeBarang" class="form-select" oninput="this.value = this.value.toUpperCase()" placeholder="ID Barang">
                                 <datalist id="kodeBarang">
                                     @foreach ($stokBarang as $barangs)
-                                        <option value="{{ $barangs->idBarang }}">{{ $barangs->idBarang }}</option>
+                                    <option value="{{ $barangs->idBarang }}" data-namabarang="{{ $barangs->namaBarang }}">{{ $barangs->idBarang }}</option>
                                     @endforeach
                                 </datalist>
                             </div>
                             <br>
-                            {{-- <input type="text" name="namaBarang" placeholder="Nama Barang" class="form-control" value="{{$barangs->namaBarang}}" disabled>
-                            <br> --}}
-                            <input type="number" name="qtyMasuk" class="form-control" placeholder="Quantity Masuk"
-                                min="1"required>
+                            <input type="text" id="namaBarang" name="namaBarang" placeholder="Nama Barang" class="form-control" disabled>
+                            <br>
+                            <input type="number" name="qtyMasuk" class="form-control" placeholder="Quantity Masuk" min="1" required>
                             <br>
                             <button type="submit" class="btn btn-primary" name="barangmasuk">Submit</button>
                         </div>
@@ -161,5 +160,5 @@
             </div>
         </div>
     </div>
-
+<script src="{{ asset('js/kode_nama.js') }}"></script>
 @endsection

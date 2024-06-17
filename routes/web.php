@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PesananController;
 use App\Http\Controllers\StokBarangController;
+use App\Http\Controllers\TokoController;
+use App\Models\Pesanan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,6 +42,35 @@ Route::middleware(['auth'])->group(function (){
     Route::post('masuk/tambah', [BarangMasukController::class, 'inputBarangMasuk'])->name('tambah.barang.masuk');
     Route::post('masuk/edit', [BarangMasukController::class, 'editBarangMasuk'])->name('edit.barang.masuk');
     Route::post('masuk/hapus', [BarangMasukController::class, 'hapusBarangMasuk'])->name('hapus.barang.masuk');
+
+    // Menampilkan Barang Keluar
+    Route::get('/keluar', [BarangMasukController::class, 'tampilBarangKeluar'])->name('barang.keluar');
+
+    // Toko Function
+    Route::get('/toko', [TokoController::class, 'index'])->name('toko.pelanggan');
+    Route::post('/toko/tambah', [TokoController::class, 'inputToko'])->name('tambah.toko.post');
+    Route::post('/toko/edit', [TokoController::class, 'editToko'])->name('edit.toko.post');
+    Route::post('/toko/hapus', [TokoController::class, 'hapusToko'])->name('hapus.toko.post');
+
+    // Pesanan Function
+    Route::get('/pesanan', [PesananController::class, 'indexAdmin'])->name('pesanan.barang');
+    Route::post('/pesanan/tambah', [PesananController::class, 'buatPesanan'])->name('tambah.pesanan.post');
+    Route::post('/pesanan/edit', [PesananController::class, 'editPesanan'])->name('edit.pesanan.post');
+    Route::post('/pesanan/hapus', [PesananController::class, 'hapusPesanan'])->name('hapus.pesanan.post');
+    Route::post('/pesanan/konfirmasi/{idPesanan}', [PesananController::class, 'konfirmasiPesanan'])->name('pesanan.konfirmasi');
+
+    // Detail Pesanan Function (Masih di Dalam Pesanan Controller)
+    Route::get('/pesanan/detail/{id}', [PesananController::class, 'showDetail'])->name('detail.pesanan');
+    Route::post('/pesanan/detail/tambah', [PesananController::class, 'tambahDetailPesanan'])->name('detail.pesanan.tambah');
+    Route::post('/pesanan/detail/ubah', [PesananController::class, 'ubahDetailPesanan'])->name('detail.pesanan.ubah');
+    Route::post('/pesanan/detail/hapus', [PesananController::class, 'hapusDetailPesanan'])->name('detail.pesanan.hapus');
+    Route::get('/pesanan/{id}/cetak-nota', [PesananController::class, 'cetakNota'])->name('cetak.nota');
+
+    // Pesanan dikonfirmasi (Penjualan)
+    Route::get('/penjualan', [PesananController::class, 'tampilPenjualan'])->name('penjualan.barang');
+    Route::post('/penjualan/filter', [PesananController::class, 'filter'])->name('penjualan.filter');
+    Route::get('/penjualan/laporan', [PesananController::class, 'cetakLaporan'])->name('penjualan.laporan');
+
 
 
 
