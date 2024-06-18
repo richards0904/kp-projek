@@ -1,7 +1,7 @@
 // Fungsi untuk update nama toko berdasarkan pilihan idToko saat menambah pesanan
 document.addEventListener("DOMContentLoaded", function () {
-    var idTokoInput = document.getElementById("idToko");
-    var namaTokoInput = document.getElementById("namaToko");
+    var idTokoInput = document.getElementById("idTokoTambah");
+    var namaTokoInput = document.getElementById("namaTokoTambah");
 
     idTokoInput.addEventListener("input", function () {
         var options = document.getElementById("kodeToko").options;
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Fungsi untuk mencegah user untuk mensubmit data yang tidak ada pada form tambah pesan
 document.addEventListener("DOMContentLoaded", function () {
     var form = document.querySelector('form[name="formTambahPesan"]');
-    var inputIdToko = form.querySelector("#idToko");
+    var inputIdToko = form.querySelector("#idTokoTambah");
     var datalist = form.querySelector("#kodeToko");
 
     form.addEventListener("submit", function (event) {
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         if (!optionExists) {
-            alert("Silakan pilih toko yang tersedia.");
+            alert("Harap pilih dari toko yang tersedia.");
             event.preventDefault();
         }
     });

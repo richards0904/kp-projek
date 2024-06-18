@@ -26,18 +26,16 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
                 $user = Auth::guard($guard)->user();
                 // Meredirect
-                // switch ($user->jabatan) {
-                //     case 'admin':
-                //         return redirect('/admin/dashboard');
-                //     case 'kepala gudang':
-                //         return redirect('/kepala-gudang/dashboard');
-                //     case 'owner':
-                //         return redirect('/owner/dashboard');
-                //     case 'sales':
-                //         return redirect('/sales/dashboard');
-                //     default:
-                //         return redirect('/home'); // Fallback for unexpected roles
-                // }
+                switch ($user->jabatan) {
+                    case 'admin':
+                        return redirect();
+                    case 'kepala gudang':
+                        return redirect();
+                    case 'super admin':
+                        return redirect()->route('pengguna.halaman');
+                    case 'sales':
+                        return redirect()->route('stok.sales');
+                }
             }
         }
 

@@ -14,6 +14,13 @@ class StokBarangController extends Controller
         return view('stok', compact('stokBarang'));
     }
 
+    public function lihatStokSales()
+    {
+        $stokBarang = StokBarang::all();
+
+        return view('sales.lihatStokSales', compact('stokBarang'));
+    }
+
     public function inputStock(Request $request)
     {
         $request->validate([

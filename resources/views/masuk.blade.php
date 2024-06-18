@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.masterAdmin')
 @section('content')
     <div id="layoutSidenav_content">
         <main>
@@ -137,14 +137,14 @@
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form autocomplete="off" method="post" action="{{ route('tambah.barang.masuk') }}">
+                    <form autocomplete="off" method="post" name="tambahBarangMasuk" action="{{ route('tambah.barang.masuk') }}">
                         @csrf
                         <div class="modal-body">
                             <div>
-                                <input type="text" id="idBarang" name="idBarang" list="kodeBarang" class="form-select" oninput="this.value = this.value.toUpperCase()" placeholder="ID Barang">
+                                <input type="text" id="idBarang" name="idBarang" list="kodeBarang" class="form-select" placeholder="Ketik Nama Barang">
                                 <datalist id="kodeBarang">
                                     @foreach ($stokBarang as $barangs)
-                                    <option value="{{ $barangs->idBarang }}" data-namabarang="{{ $barangs->namaBarang }}">{{ $barangs->idBarang }}</option>
+                                    <option value="{{ $barangs->idBarang }}" data-namabarang="{{ $barangs->namaBarang }}">{{ $barangs->namaBarang }}</option>
                                     @endforeach
                                 </datalist>
                             </div>

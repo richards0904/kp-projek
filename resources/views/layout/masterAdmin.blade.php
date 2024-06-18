@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>BarangKoe</title>
+    <link rel="icon" href="{{ asset('gambar/logo.ico') }}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> {{-- CSS Bootsrap Icon --}}
     <link href="{{ asset('css/main.css') }}" rel="stylesheet" />
@@ -62,7 +63,11 @@
                         </a>
                         <a class="nav-link" href="{{route('penjualan.barang')}}">
                             <div class="sb-nav-link-icon"><i class="bi bi-envelope"></i></div>
-                            Penjualan
+                            Hasil Penjualan
+                        </a>
+                        <a class="nav-link" href="{{route('pengguna.halaman')}}">
+                            <div class="sb-nav-link-icon"><i class="bi bi-envelope"></i></div>
+                            Kelola Pengguna
                         </a>
                         <a class="nav-link" href="/logout">
                             <div class="sb-nav-link-icon"><i class="bi bi-box-arrow-left"></i></div>
@@ -75,9 +80,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
         </script>
         <script src="{{ asset('js/main.js') }}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="{{ asset('js/datatables.js') }}"></script>
 </body>

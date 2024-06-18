@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.masterAdmin')
 @section('content')
     <div id="layoutSidenav_content">
         <main>

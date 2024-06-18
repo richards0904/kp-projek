@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\StokBarangController;
 use App\Http\Controllers\TokoController;
@@ -32,10 +33,12 @@ Route::middleware(['auth'])->group(function (){
     Route::get('/logout', [LoginController::class, 'postLogout'])->name('logout');
 
     // Stok Function
-    Route::get('/stok', [StokBarangController::class, 'index'])->name('stok.barang')->middleware('user-access:admin,kepala gudang') ;
+    Route::get('/stok', [StokBarangController::class, 'index'])->name('stok.barang')->middleware('user-access:admin,kepala gudang');
     Route::post('/stok/tambah', [StokBarangController::class, 'inputStock'])->name('tambah.stok.post');
     Route::post('/stok/edit', [StokBarangController::class, 'editStock'])->name('edit.stok.post');
     Route::post('/stok/hapus', [StokBarangController::class, 'hapusStock'])->name('hapus.stok.post');
+
+    Route::get('/stok/sales', [StokBarangController::class, 'lihatStokSales'])->name('stok.sales')->middleware('user-access:sales');
 
     // Barang Masuk Function
     Route::get('/masuk', [BarangMasukController::class, 'index'])->name('barang.masuk')->middleware('user-access:kepala gudang');
@@ -47,13 +50,17 @@ Route::middleware(['auth'])->group(function (){
     Route::get('/keluar', [BarangMasukController::class, 'tampilBarangKeluar'])->name('barang.keluar');
 
     // Toko Function
-    Route::get('/toko', [TokoController::class, 'index'])->name('toko.pelanggan');
-    Route::post('/toko/tambah', [TokoController::class, 'inputToko'])->name('tambah.toko.post');
-    Route::post('/toko/edit', [TokoController::class, 'editToko'])->name('edit.toko.post');
-    Route::post('/toko/hapus', [TokoController::class, 'hapusToko'])->name('hapus.toko.post');
+    Route::get('/toko', [TokoController::class, 'index'])->name('toko.pelanggan')->middleware('user-access:admin');
+    Route::get('/toko/sales', [TokoController::class, 'tokoSales'])->name('toko.sales')->middleware('user-access:sales');
+    Route::post('/toko/tambah', [TokoController::class, 'inputToko'])->name('tambah.toko.post')->middleware('user-access:sales,admin');
+    Route::post('/toko/edit', [TokoController::class, 'editToko'])->name('edit.toko.post')->middleware('user-access:sales,admin');
+    Route::post('/toko/hapus', [TokoController::class, 'hapusToko'])->name('hapus.toko.post')->middleware('user-access:sales,admin');
+
+
 
     // Pesanan Function
     Route::get('/pesanan', [PesananController::class, 'indexAdmin'])->name('pesanan.barang');
+    Route::get('/pesanan/sales', [PesananController::class, 'index'])->name('pesanan.sales');
     Route::post('/pesanan/tambah', [PesananController::class, 'buatPesanan'])->name('tambah.pesanan.post');
     Route::post('/pesanan/edit', [PesananController::class, 'editPesanan'])->name('edit.pesanan.post');
     Route::post('/pesanan/hapus', [PesananController::class, 'hapusPesanan'])->name('hapus.pesanan.post');
@@ -71,6 +78,11 @@ Route::middleware(['auth'])->group(function (){
     Route::post('/penjualan/filter', [PesananController::class, 'filter'])->name('penjualan.filter');
     Route::get('/penjualan/laporan', [PesananController::class, 'cetakLaporan'])->name('penjualan.laporan');
 
+    // Pengguna Function
+    Route::get('/pengguna', [PenggunaController::class, 'index'])->name('pengguna.halaman');
+    Route::post('pengguna/tambah', [PenggunaController::class, 'inputPengguna'])->name('tambah.pengguna');
+    Route::post('pengguna/edit', [PenggunaController::class, 'editPengguna'])->name('edit.pengguna');
+    Route::post('pengguna/hapus', [PenggunaController::class, 'hapusPengguna'])->name('hapus.pengguna');
 
 
 

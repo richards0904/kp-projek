@@ -17,19 +17,17 @@ class PesananController extends Controller
 {
     public function index()
     {
-        $a = 'Dikonfirmasi';
         $b = 'Sedang Diproses';
         $pesananAll = Pesanan::select('*')
             ->join('tokos', 'pesanans.idToko', '=', 'tokos.idToko')
             ->join('users', 'pesanans.idPegawai', '=', 'users.idPegawai')
-            ->where(function ($query) use ($a, $b) {
-                $query->where('status', '=', $a)
-                    ->orWhere('status', '=', $b);
+            ->where(function ($query) use ($b) {
+                $query->where('status', '=', $b);
             })
             ->where('users.idPegawai', Auth::user()->idPegawai)
             ->get();
         $tokoAll = Toko::all();
-        return view('pesanan', compact('pesananAll','tokoAll'));
+        return view('sales.pesananSales', compact('pesananAll','tokoAll'));
     }
 
     public function indexAdmin()
@@ -39,8 +37,7 @@ class PesananController extends Controller
             ->join('tokos', 'pesanans.idToko', '=', 'tokos.idToko')
             ->join('users', 'pesanans.idPegawai', '=', 'users.idPegawai')
             ->where(function ($query) use ($b) {
-                $query->where('status', '=', )
-                    ->orWhere('status', '=', $b);
+                $query ->where('status', '=', $b);
             })
             ->get();
         $tokoAll = Toko::all();
@@ -63,7 +60,7 @@ class PesananController extends Controller
             'idPegawai' => $request->idPegawai,
             'total' => 0,
         ]);
-        return redirect()->route('pesanan.barang');
+        return redirect()->route('pesanan.sales');
     }
 
     public function editPesanan(Request $request)
@@ -72,14 +69,14 @@ class PesananController extends Controller
             ->update([
                 'idToko' => $request->idToko,
             ]);
-        return redirect()->route('pesanan.barang');
+        return redirect()->route('pesanan.sales');
     }
 
     public function hapusPesanan(Request $request)
     {
         $hapusPesanan = Pesanan::where('idPesanan', $request->idPesanan)
             ->delete();
-        return redirect()->route('pesanan.barang');
+        return redirect()->route('pesanan.sales');
     }
 
     public function konfirmasiPesanan(Request $request, $idPesanan)
@@ -141,11 +138,16 @@ class PesananController extends Controller
 
     public function tambahDetailPesanan(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'idPesanan' => 'required|exists:pesanans,idPesanan',
             'idBarang' => 'required|exists:stok_barangs,idBarang',
             'qtyPesanan' => 'required|integer|min:1'
         ]);
+
+        // Jika validasi gagal
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput()->with('pesan', 'Barang yang dimasukan tidak valid');
+        }
 
         $idPesanan = $request->idPesanan;
         $idBarang = $request->idBarang;

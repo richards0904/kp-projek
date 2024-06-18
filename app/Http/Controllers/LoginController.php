@@ -32,9 +32,9 @@ class LoginController extends Controller
             } else if (Auth::user()->jabatan == 'admin') {
                 return redirect()->route('stok.barang');
             } else if (Auth::user()->jabatan == 'sales') {
-                return redirect()->route('kelola.admin');
+                return redirect()->route('stok.sales');
             } else {
-                return redirect()->route('');
+                return redirect()->route('pengguna.halaman');
             }
             exit();
         } else {

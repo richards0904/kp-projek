@@ -1,5 +1,4 @@
-@extends('layout.master')
-
+@extends('layout.masterAdmin')
 @section('content')
     <div id="layoutSidenav_content">
         <main>
@@ -73,7 +72,7 @@
                                                     @csrf
                                                     <div class="modal-body">
                                                         <input type="text" name="editNamaToko" id="editNamaToko"
-                                                            value="{{ $tokos->namaToko }}" class="form-control" required>
+                                                            value="{{ $tokos->namaToko }}" maxlength="30" class="form-control" required>
                                                         <br>
                                                         <input type="text" name="editAlamat" id="editAlamat"
                                                             value="{{ $tokos->alamat }}" class="form-control" required>
@@ -138,7 +137,7 @@
                     <form autocomplete="off" action="{{route('tambah.toko.post')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
-                            <input type="text" id="namaToko" name="namaToko" placeholder="Nama Toko" class="form-control" required >
+                            <input type="text" id="namaToko" name="namaToko" placeholder="Nama Toko" maxlength="30" class="form-control" required >
                             <br>
                             <input type="text" id="alamat" name="alamat" placeholder="Alamat Toko" class="form-control" required >
                             <br>

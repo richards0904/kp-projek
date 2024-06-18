@@ -1,9 +1,9 @@
-@extends('layout.masterAdmin')
+@extends('layout.masterSales')
 @section('content')
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Rekap Pesanan</h1>
+                <h1 class="mt-4">Kelola Pesanan</h1>
             </div>
             <div class="card mb-4">
                 <div class="card-header">
@@ -15,10 +15,6 @@
                     </button>
                 </div>
                 <div class="card-body">
-                    {{-- <div class="alert alert-danger alert-dismissible fade show">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        <strong>Perhatian!!!</strong> Stok Ayam Telah Habis
-                    </div> --}}
                     @if (session()->has('pesan'))
                     <div class="alert alert-danger alert-dismissible fade show">
                         <span class="text-danger">{{ session()->get('pesan') }}</span>
@@ -52,12 +48,7 @@
                                     <td>{{ $pesanans->status }}</td>
                                     <td>{{ $pesanans->tglPesanan }}</td>
                                     <td>
-                                        <div class="button-group">
-                                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                                data-bs-target="#konfirmasi{{ $pesanans->idPesanan }}"@if($pesanans->status == 'Dikonfirmasi' || $pesanans->total == 0) disabled @endif>
-                                                <i class="bi bi-check-square" style="margin-right: 5px"></i>
-                                                Konfirmasi
-                                            </button>
+                                        <div class="button-group d-flex justify-content-center">
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit{{ $pesanans->idPesanan }}" data-idpesanan="{{ $pesanans->idPesanan }}" data-idtoko="{{ $pesanans->idToko }}"  @if($pesanans->status == 'Dikonfirmasi') disabled @endif>
                                                 <i class="bi bi-pencil" style="margin-right: 5px"></i> Edit
                                             </button>
@@ -125,38 +116,10 @@
                                                             <span class="text-danger" style="display: block; margin-bottom: 15px" >(Pesanan yang dihapus tidak dapat dikembalikan)</span>
                                                         <input type="hidden" name="idPesanan" value="{{ $pesanans->idPesanan }}">
                                                         <button a type="submit" class="btn btn-danger"
-                                                            name="hapusDataPesanan">Hapus</button>
+                                                            name="hapusDataPesanan">Hapus
+                                                        </button>
                                                     </div>
                                                 </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                            <!-- Konfirmasi Modal -->
-                            @foreach ($pesananAll as $pesanans)
-                                <div class="modal fade" id="konfirmasi{{ $pesanans->idPesanan }}">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <!-- Konfirmasi Modal Header -->
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Konfirmasi Pesanan?</h4>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                            </div>
-                                            <!-- Konfirmasi Modal body -->
-                                            <div class="modal-body">
-                                                @if ($pesanans->status !== 'Dikonfirmasi')
-                                                <form method="post" action="{{ route('pesanan.konfirmasi', $pesanans->idPesanan) }}">
-                                                    @csrf
-                                                    <div class="modal-body">
-                                                        <p style="margin-bottom: 5px">Apakah anda yakin ingin mengkonfirmasi pesanan ini? </p>
-                                                            <span class="text-danger" style="display: block; margin-bottom: 15px;" >(Setelah Dikonfirmasi pesanan tidak dapat dibatalkan)</span>
-                                                        <button a type="submit" class="btn btn-success"
-                                                            name="konfirmasiPesanan">Konfirmasi</button>
-                                                </form>
-                                                @else
-                                                <button class="btn btn-secondary" disabled>Sudah Dikonfirmasi</button>
-                                                @endif
                                             </div>
                                         </div>
                                     </div>

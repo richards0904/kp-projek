@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.masterAdmin')
 
 @section('content')
     <div id="layoutSidenav_content">
@@ -71,7 +71,7 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="editModalLabel">Edit Jumlah Barang Pesanan</h5>
+                                                    <h5 class="modal-title" id="editModalLabel">Edit Jumlah Barang {{$detail->stokBarang->namaBarang}}</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
@@ -94,7 +94,7 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="deleteModalLabel">Hapus Barang Pesanan</h5>
+                                                    <h5 class="modal-title" id="deleteModalLabel">Hapus Barang {{$detail->stokBarang->namaBarang}}</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
@@ -127,15 +127,18 @@
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form action="{{route('detail.pesanan.tambah')}}" method="post" autocomplete="off">
+                    <form action="{{route('detail.pesanan.tambah')}}" method="post" name="tambahDetailPesanan" autocomplete="off">
                         @csrf
                             <div class="mb-3">
-                                <input type="text" id="idBarang" name="idBarang" list="kodeBarang" placeholder="Kode Barang" class="form-select" oninput="this.value = this.value.toUpperCase()" placeholder="ID Barang">
+                                <input type="text" id="idBarang" name="idBarang" list="kodeBarang" placeholder="Kode Barang" class="form-select" placeholder="Ketikan Nama Barang">
                                 <datalist id="kodeBarang">
                                     @foreach ($stokBarangs as $barangs)
-                                    <option value="{{ $barangs->idBarang }}" data-namabarang="{{ $barangs->namaBarang }}">{{ $barangs->idBarang }}</option>
+                                    <option value="{{ $barangs->idBarang }}" data-namabarang="{{ $barangs->namaBarang }}">{{ $barangs->namaBarang }}</option>
                                     @endforeach
                                 </datalist>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" id="namaBarang" name="namaBarang" class="form-control" placeholder="Nama Barang" disabled>
                             </div>
                             <div class="mb-3">
                                 <input type="number" id="qtyPesanan" name="qtyPesanan" class="form-control" placeholder="Banyak Barang" min="1" required>
@@ -148,4 +151,5 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('js/kode_nama.js') }}"></script>
 @endsection
