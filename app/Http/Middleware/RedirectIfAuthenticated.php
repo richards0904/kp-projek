@@ -28,9 +28,9 @@ class RedirectIfAuthenticated
                 // Meredirect
                 switch ($user->jabatan) {
                     case 'admin':
-                        return redirect();
+                        return redirect()->route('stok.admin');
                     case 'kepala gudang':
-                        return redirect();
+                        return redirect()->route('stok.barang');
                     case 'super admin':
                         return redirect()->route('pengguna.halaman');
                     case 'sales':
