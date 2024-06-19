@@ -59,7 +59,7 @@
                                     <td>{{ $pesanans->status }}</td>
                                     <td>{{ $pesanans->tglPesanan }}</td>
                                     <td>
-                                        <a href="{{ route('detail.pesanan', $pesanans->idPesanan) }}" class="btn btn-info">
+                                        <a href="{{ route('detail.admin', $pesanans->idPesanan) }}" class="btn btn-info">
                                         <i class="bi bi-eye" style="margin-right: 5px"></i>
                                         Detail
                                         </a>

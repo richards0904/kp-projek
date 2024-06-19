@@ -11,7 +11,7 @@ class StokBarangController extends Controller
     {
         $stokBarang = StokBarang::all();
 
-        return view('stok', compact('stokBarang'));
+        return view('kepalaGudang.stok', compact('stokBarang'));
     }
 
     public function lihatStokSales()
@@ -19,6 +19,13 @@ class StokBarangController extends Controller
         $stokBarang = StokBarang::all();
 
         return view('sales.lihatStokSales', compact('stokBarang'));
+    }
+
+    public function lihatStokAdmin()
+    {
+        $stokBarang = StokBarang::all();
+
+        return view('admin.lihatStokAdmin', compact('stokBarang'));
     }
 
     public function inputStock(Request $request)

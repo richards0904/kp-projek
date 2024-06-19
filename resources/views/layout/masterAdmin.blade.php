@@ -30,44 +30,21 @@
                         <div>
                             <h6 style="text-align: center; font-weight: 400; color: white; padding: 3%">Halo {{auth()->user()->namaPegawai}} anda adalah seorang {{auth()->user()->jabatan}}</h6>
                         </div>
-                        {{-- Mulai Stok DropDown --}}
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="bi bi-houses-fill"></i></div>
-                            Stok
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        <a class="nav-link" href="{{route('stok.admin')}}">
+                            <div class="sb-nav-link-icon"><i class="bi bi-house-door-fill"></i></div>
+                            Lihat Stok
                         </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="{{route('stok.barang')}}">
-                                    <div class="sb-nav-link-icon"><i class="bi bi-house-door-fill"></i></div>
-                                    Stok Barang
-                                </a>
-                                <a class="nav-link" href="{{route('barang.masuk')}}">
-                                    <div class="sb-nav-link-icon"><i class="bi bi-house-add-fill"></i></div>
-                                    Barang Masuk
-                                </a>
-                                <a class="nav-link" href="{{route('barang.keluar')}}">
-                                    <div class="sb-nav-link-icon"><i class="bi bi-house-dash-fill"></i></div>
-                                    Barang Keluar
-                                </a>
-                            </nav>
-                        </div>
-                        {{-- Akhir Stok DropDown --}}
                         <a class="nav-link" href="{{route('toko.pelanggan')}}">
                             <div class="sb-nav-link-icon"><i class="bi bi-shop"></i></div>
-                            Data Toko
+                            Kelola Toko
                         </a>
                         <a class="nav-link" href="{{route('pesanan.barang')}}">
                             <div class="sb-nav-link-icon"><i class="bi bi-envelope"></i></div>
-                            Rekap Pesanan
+                            Kelola Pesanan
                         </a>
                         <a class="nav-link" href="{{route('penjualan.barang')}}">
-                            <div class="sb-nav-link-icon"><i class="bi bi-envelope"></i></div>
-                            Hasil Penjualan
-                        </a>
-                        <a class="nav-link" href="{{route('pengguna.halaman')}}">
-                            <div class="sb-nav-link-icon"><i class="bi bi-envelope"></i></div>
-                            Kelola Pengguna
+                            <div class="sb-nav-link-icon"><i class="bi bi-receipt"></i></div>
+                            Penjualan
                         </a>
                         <a class="nav-link" href="/logout">
                             <div class="sb-nav-link-icon"><i class="bi bi-box-arrow-left"></i></div>

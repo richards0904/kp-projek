@@ -41,7 +41,7 @@ class PesananController extends Controller
             })
             ->get();
         $tokoAll = Toko::all();
-        return view('pesanan', compact('pesananAll','tokoAll'));
+        return view('admin.pesanan', compact('pesananAll','tokoAll'));
     }
 
     public function buatPesanan(Request $request)
@@ -133,7 +133,14 @@ class PesananController extends Controller
     {
         $pesanan = Pesanan::with(['detailPesanans', 'toko'])->find($id);
         $stokBarangs = StokBarang::all();
-        return view('detail', compact('pesanan','stokBarangs'));
+        return view('sales.detail', compact('pesanan','stokBarangs'));
+    }
+
+    public function showDetailAdmin($id)
+    {
+        $pesanan = Pesanan::with(['detailPesanans', 'toko'])->find($id);
+        $stokBarangs = StokBarang::all();
+        return view('admin.detailAdmin', compact('pesanan','stokBarangs'));
     }
 
     public function tambahDetailPesanan(Request $request)
@@ -243,7 +250,7 @@ class PesananController extends Controller
     {
         $pesanan = Pesanan::with('detailPesanans.stokBarang', 'toko', 'pegawai')->findOrFail($id);
 
-        $pdf = FacadePdf::loadView('cetakNota', compact('pesanan'));
+        $pdf = FacadePdf::loadView('admin.cetakNota', compact('pesanan'));
         return $pdf->download('nota_pesanan_' . $id . '.pdf');
     }
 
@@ -259,7 +266,7 @@ class PesananController extends Controller
             ->get();
         $bulan = date('m');
         $tahun = date('Y');
-        return view('penjualan', compact('pesananKonfirmasi','bulan', 'tahun'));
+        return view('admin.penjualan', compact('pesananKonfirmasi','bulan', 'tahun'));
     }
 
     public function filter(Request $request)
@@ -277,7 +284,7 @@ class PesananController extends Controller
             ->whereYear('tglPesanan', $tahun)
             ->get();
 
-        return view('penjualan', compact('pesananKonfirmasi', 'bulan', 'tahun'));
+        return view('admin.penjualan', compact('pesananKonfirmasi', 'bulan', 'tahun'));
     }
 
     public function cetakLaporan(Request $request)
@@ -290,7 +297,7 @@ class PesananController extends Controller
             ->whereYear('tglPesanan', $tahun)
             ->get();
 
-        $pdf = FacadePdf::loadView('cetakLaporan', compact('pesananKonfirmasi', 'bulan', 'tahun'));
+        $pdf = FacadePdf::loadView('admin.cetakLaporan', compact('pesananKonfirmasi', 'bulan', 'tahun'));
         return $pdf->download('laporan_penjualan_' . $bulan . '_' . $tahun . '.pdf');
     }
 

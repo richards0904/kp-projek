@@ -33,21 +33,22 @@ Route::middleware(['auth'])->group(function (){
     Route::get('/logout', [LoginController::class, 'postLogout'])->name('logout');
 
     // Stok Function
-    Route::get('/stok', [StokBarangController::class, 'index'])->name('stok.barang')->middleware('user-access:admin,kepala gudang');
-    Route::post('/stok/tambah', [StokBarangController::class, 'inputStock'])->name('tambah.stok.post');
-    Route::post('/stok/edit', [StokBarangController::class, 'editStock'])->name('edit.stok.post');
-    Route::post('/stok/hapus', [StokBarangController::class, 'hapusStock'])->name('hapus.stok.post');
+    Route::get('/stok', [StokBarangController::class, 'index'])->name('stok.barang')->middleware('user-access:kepala gudang');
+    Route::post('/stok/tambah', [StokBarangController::class, 'inputStock'])->name('tambah.stok.post')->middleware('user-access:kepala gudang');
+    Route::post('/stok/edit', [StokBarangController::class, 'editStock'])->name('edit.stok.post')->middleware('user-access:kepala gudang');
+    Route::post('/stok/hapus', [StokBarangController::class, 'hapusStock'])->name('hapus.stok.post')->middleware('user-access:kepala gudang');
 
     Route::get('/stok/sales', [StokBarangController::class, 'lihatStokSales'])->name('stok.sales')->middleware('user-access:sales');
+    Route::get('/stok/admin', [StokBarangController::class, 'lihatStokAdmin'])->name('stok.admin')->middleware('user-access:admin');
 
     // Barang Masuk Function
     Route::get('/masuk', [BarangMasukController::class, 'index'])->name('barang.masuk')->middleware('user-access:kepala gudang');
-    Route::post('masuk/tambah', [BarangMasukController::class, 'inputBarangMasuk'])->name('tambah.barang.masuk');
-    Route::post('masuk/edit', [BarangMasukController::class, 'editBarangMasuk'])->name('edit.barang.masuk');
-    Route::post('masuk/hapus', [BarangMasukController::class, 'hapusBarangMasuk'])->name('hapus.barang.masuk');
+    Route::post('masuk/tambah', [BarangMasukController::class, 'inputBarangMasuk'])->name('tambah.barang.masuk')->middleware('user-access:kepala gudang');
+    Route::post('masuk/edit', [BarangMasukController::class, 'editBarangMasuk'])->name('edit.barang.masuk')->middleware('user-access:kepala gudang');
+    Route::post('masuk/hapus', [BarangMasukController::class, 'hapusBarangMasuk'])->name('hapus.barang.masuk')->middleware('user-access:kepala gudang');
 
     // Menampilkan Barang Keluar
-    Route::get('/keluar', [BarangMasukController::class, 'tampilBarangKeluar'])->name('barang.keluar');
+    Route::get('/keluar', [BarangMasukController::class, 'tampilBarangKeluar'])->name('barang.keluar')->middleware('user-access:kepala gudang');
 
     // Toko Function
     Route::get('/toko', [TokoController::class, 'index'])->name('toko.pelanggan')->middleware('user-access:admin');
@@ -68,6 +69,7 @@ Route::middleware(['auth'])->group(function (){
 
     // Detail Pesanan Function (Masih di Dalam Pesanan Controller)
     Route::get('/pesanan/detail/{id}', [PesananController::class, 'showDetail'])->name('detail.pesanan');
+    Route::get('/pesanan/detail/admin/{id}', [PesananController::class, 'showDetailAdmin'])->name('detail.admin');
     Route::post('/pesanan/detail/tambah', [PesananController::class, 'tambahDetailPesanan'])->name('detail.pesanan.tambah');
     Route::post('/pesanan/detail/ubah', [PesananController::class, 'ubahDetailPesanan'])->name('detail.pesanan.ubah');
     Route::post('/pesanan/detail/hapus', [PesananController::class, 'hapusDetailPesanan'])->name('detail.pesanan.hapus');

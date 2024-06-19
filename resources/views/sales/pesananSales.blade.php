@@ -48,7 +48,7 @@
                                     <td>{{ $pesanans->status }}</td>
                                     <td>{{ $pesanans->tglPesanan }}</td>
                                     <td>
-                                        <div class="button-group d-flex justify-content-center">
+                                        <div class="button-group">
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit{{ $pesanans->idPesanan }}" data-idpesanan="{{ $pesanans->idPesanan }}" data-idtoko="{{ $pesanans->idToko }}"  @if($pesanans->status == 'Dikonfirmasi') disabled @endif>
                                                 <i class="bi bi-pencil" style="margin-right: 5px"></i> Edit
                                             </button>

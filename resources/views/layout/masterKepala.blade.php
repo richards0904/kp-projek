@@ -53,22 +53,6 @@
                             </nav>
                         </div>
                         {{-- Akhir Stok DropDown --}}
-                        <a class="nav-link" href="{{route('toko.pelanggan')}}">
-                            <div class="sb-nav-link-icon"><i class="bi bi-shop"></i></div>
-                            Data Toko
-                        </a>
-                        <a class="nav-link" href="{{route('pesanan.barang')}}">
-                            <div class="sb-nav-link-icon"><i class="bi bi-envelope"></i></div>
-                            Rekap Pesanan
-                        </a>
-                        <a class="nav-link" href="{{route('penjualan.barang')}}">
-                            <div class="sb-nav-link-icon"><i class="bi bi-envelope"></i></div>
-                            Hasil Penjualan
-                        </a>
-                        <a class="nav-link" href="{{route('pengguna.halaman')}}">
-                            <div class="sb-nav-link-icon"><i class="bi bi-envelope"></i></div>
-                            Kelola Pengguna
-                        </a>
                         <a class="nav-link" href="/logout">
                             <div class="sb-nav-link-icon"><i class="bi bi-box-arrow-left"></i></div>
                             Log Out

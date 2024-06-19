@@ -16,7 +16,7 @@ class BarangMasukController extends Controller
             ->get();
         $stokBarang = StokBarang::select('*')
             ->get();
-        return view('masuk', compact('stokBarangMasuk', 'stokBarang'));
+        return view('kepalaGudang.masuk', compact('stokBarangMasuk', 'stokBarang'));
     }
     public function inputBarangMasuk(Request $request)
     {
@@ -93,7 +93,7 @@ class BarangMasukController extends Controller
             ->get();
         $stokBarang = StokBarang::select('*')
             ->get();
-        return view('keluar', compact('stokBarangKeluar', 'stokBarang'));
+        return view('kepalaGudang.keluar', compact('stokBarangKeluar', 'stokBarang'));
     }
 
 }

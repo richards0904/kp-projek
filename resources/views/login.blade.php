@@ -9,7 +9,7 @@
     </head>
     <body>
         <div class="center">
-            <form action="{{route('login')}}" method="post">
+            <form action="{{route('login')}}" method="post" autocomplete="off">
                 @csrf
                 <div class="tengah"><img class="logo" src="{{ asset('gambar/logo.png') }}" alt="logo"></div>
                 <h2>Log in</h2>

@@ -12,7 +12,7 @@ class TokoController extends Controller
     {
         $dataToko = Toko::all();
 
-        return view('toko', compact('dataToko'));
+        return view('admin.toko', compact('dataToko'));
     }
 
     public function tokoSales()
