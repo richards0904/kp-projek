@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id('idBarangMasuk');
             $table->string('idBarang',10);
             $table->date('tglMasuk')->default(DB::raw('CURRENT_TIMESTAMP'));;
+            $table->integer('hargaBeli');
             $table->integer('qtyMasuk');
             $table->foreign('idBarang')->references('idBarang')->on('stok_barangs')->onDelete('cascade');
         });

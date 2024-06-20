@@ -31,6 +31,7 @@ class BarangMasukController extends Controller
         );
             BarangMasuk::create([
                 'idBarang' => $request->idBarang,
+                'hargaBeli' => $request->hargaBeli,
                 'qtyMasuk' => $request->qtyMasuk
             ]);
             $stokAwal = StokBarang::where('idBarang', $request->idBarang)
@@ -63,6 +64,7 @@ class BarangMasukController extends Controller
             ]);
         $editBarangMasuk = BarangMasuk::where('idBarangMasuk', $request->idBarangMasuk)
             ->update([
+                'hargaBeli' => $request->hargaBeli,
                 'qtyMasuk' => $request->qtyMasuk
             ]);
         return redirect()->route('barang.masuk');

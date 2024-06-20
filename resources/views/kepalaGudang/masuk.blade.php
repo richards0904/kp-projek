@@ -29,6 +29,7 @@
                                 <th>Tanggal Masuk</th>
                                 <th>Kode Barang</th>
                                 <th>Nama Barang</th>
+                                <th>Harga Beli</th>
                                 <th>Quantity Masuk</th>
                                 <th>Aksi</th>
                             </tr>
@@ -41,6 +42,7 @@
                                     <td>{{ $masuk->tglMasuk }} </td>
                                     <td>{{ $masuk->idBarang }}</td>
                                     <td>{{ $masuk->namaBarang }}</td>
+                                    <td>{{ $masuk->formatRupiah('hargaBeli') }}</td>
                                     <td>{{ $masuk->qtyMasuk }}</td>
                                     <td>
                                         <button type="button" class="btn btn-warning" data-bs-toggle="modal"
@@ -76,6 +78,9 @@
                                                         <br>
                                                         <input type="number" name="qtyMasuk"
                                                             value="{{ $masuk->qtyMasuk }}" class="form-control" min="1" required>
+                                                        <br>
+                                                        <input type="number" name="hargaBeli"
+                                                            value="{{ $masuk->hargaBeli }}" class="form-control" min="2000" required>
                                                         <br>
                                                         <input type="hidden" name="idBarangMasuk"
                                                             value="{{ $masuk->idBarangMasuk }}">
@@ -141,7 +146,10 @@
                         @csrf
                         <div class="modal-body">
                             <div>
-                                <input type="text" id="idBarang" name="idBarang" list="kodeBarang" class="form-select" placeholder="Ketik Nama Barang">
+                                <input type="text" id="idBarang" name="idBarang" list="kodeBarang" class="form-select" placeholder="Ketik Nama Barang" @if ($stokBarang->isEmpty()) disabled @endif>
+                                @if ($stokBarang->isEmpty())
+                                    <span style="font-size: 15px; color: red">Harap masukan data barang pada tabel Stok terlebih dahulu</span>
+                                @endif
                                 <datalist id="kodeBarang">
                                     @foreach ($stokBarang as $barangs)
                                     <option value="{{ $barangs->idBarang }}" data-namabarang="{{ $barangs->namaBarang }}">{{ $barangs->namaBarang }}</option>
@@ -152,6 +160,8 @@
                             <input type="text" id="namaBarang" name="namaBarang" placeholder="Nama Barang" class="form-control" disabled>
                             <br>
                             <input type="number" name="qtyMasuk" class="form-control" placeholder="Quantity Masuk" min="1" required>
+                            <br>
+                            <input type="number" name="hargaBeli" class="form-control" placeholder="Harga Beli" min="2000" required>
                             <br>
                             <button type="submit" class="btn btn-primary" name="barangmasuk">Submit</button>
                         </div>
