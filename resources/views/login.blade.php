@@ -4,7 +4,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Login</title>
+        <title>Sistem Penjualan</title>
+        <link rel="icon" href="{{ asset('gambar/logo.ico') }}" type="image/x-icon">
         <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     </head>
     <body>
@@ -30,4 +31,5 @@
             </form>
         </div>
     </body>
+    <script src="{{ asset('js/auto_refresh.js') }}"></script>
 </html>

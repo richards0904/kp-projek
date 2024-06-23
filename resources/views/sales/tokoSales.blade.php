@@ -3,7 +3,7 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Data Toko</h1>
+                <h1 class="mt-4">Kelola Toko</h1>
             </div>
             <div class="card mb-4">
                 <div class="card-header">
@@ -72,13 +72,13 @@
                                                     @csrf
                                                     <div class="modal-body">
                                                         <input type="text" name="editNamaToko" id="editNamaToko"
-                                                            value="{{ $tokos->namaToko }}" maxlength="30" class="form-control" required>
+                                                            value="{{ $tokos->namaToko }}" maxlength="60" class="form-control" required>
                                                         <br>
                                                         <input type="text" name="editAlamat" id="editAlamat"
-                                                            value="{{ $tokos->alamat }}" class="form-control" required>
+                                                            value="{{ $tokos->alamat }}" maxlength="60" class="form-control" required>
                                                         <br>
                                                         <input type="text" name="editNoTelp" id="editNoTelp"
-                                                            value="{{ $tokos->noTelp }}" class="form-control" required>
+                                                            value="{{ $tokos->noTelp }}"  minlength="10" maxlength="14" class="form-control" required>
                                                         <br>
                                                         <input type="hidden" name="idToko" value="{{ $tokos->idToko }}">
                                                         <button type="submit" class="btn btn-primary"
@@ -137,9 +137,9 @@
                     <form autocomplete="off" action="{{route('tambah.toko.post')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
-                            <input type="text" id="namaToko" name="namaToko" placeholder="Nama Toko" maxlength="30" class="form-control" required >
+                            <input type="text" id="namaToko" name="namaToko" placeholder="Nama Toko" maxlength="60" class="form-control" required >
                             <br>
-                            <input type="text" id="alamat" name="alamat" placeholder="Alamat Toko" class="form-control" required >
+                            <input type="text" id="alamat" name="alamat" placeholder="Alamat Toko" maxlength="60" class="form-control" required >
                             <br>
                             <input type="text" id="noTelp" name="noTelp" placeholder="Nomor Telepon" class="form-control" required>
                             <br>

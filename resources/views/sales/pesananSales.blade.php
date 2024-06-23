@@ -77,10 +77,10 @@
                                             </div>
                                             <!-- Edit Modal body -->
                                             <div class="modal-body">
-                                                <form method="post" action="{{ route('edit.pesanan.post')}}" autocomplete="off">
+                                                <form method="post" action="{{ route('edit.pesanan.post')}}" autocomplete="off" name="formUbahPesan">
                                                     @csrf
                                                     <div class="modal-body">
-                                                        <input type="text" id="idToko" name="idToko" list="kodeToko" class="form-select"  placeholder="Ketik Nama Toko" value="{{$pesanans->namaToko}}">
+                                                        <input type="text" id="idTokoUbah" name="idToko" list="kodeToko" class="form-select"  placeholder="Ketik Nama Toko" value="{{$pesanans->idToko}}" required>
                                                         <datalist id="kodeToko">
                                                             @foreach ($tokoAll as $tokos)
                                                                 <option value="{{ $tokos->idToko }}" data-namaToko="{{ $tokos->namaToko }}">{{ $tokos->namaToko }}</option>
@@ -145,7 +145,7 @@
                     <form autocomplete="off" action="{{route('tambah.pesanan.post')}}" method="post" enctype="multipart/form-data" name="formTambahPesan">
                         @csrf
                         <div class="modal-body">
-                            <input type="text" id="idTokoTambah" name="idToko" list="kodeToko" class="form-select"  placeholder="Ketik Nama Toko">
+                            <input type="text" id="idTokoTambah" name="idToko" list="kodeToko" class="form-select"  placeholder="Ketik Nama Toko" required>
                             <datalist id="kodeToko">
                                 @foreach ($tokoAll as $tokos)
                                     <option value="{{ $tokos->idToko }}" data-namaToko="{{ $tokos->namaToko }}">{{ $tokos->namaToko }}</option>

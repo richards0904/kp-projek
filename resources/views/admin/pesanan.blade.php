@@ -48,42 +48,39 @@
                                                 Konfirmasi
                                             </button>
                                             <a href="{{ route('detail.admin', $pesanans->idPesanan) }}" class="btn btn-info">
-                                                <i class="bi bi-eye" style="margin-right: 5px"></i>
+                                                <i class="bi bi-eye" style="margin-right: 5px;"></i>
                                                 Detail
                                             </a>
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
-                            <!-- Konfirmasi Modal -->
-                            @foreach ($pesananAll as $pesanans)
+                                <!-- Konfirmasi Modal -->
                                 <div class="modal fade" id="konfirmasi{{ $pesanans->idPesanan }}">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                            <!-- Konfirmasi Modal Header -->
+                                        <!-- Konfirmasi Modal Header -->
                                             <div class="modal-header">
                                                 <h4 class="modal-title">Konfirmasi Pesanan?</h4>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                             </div>
                                             <!-- Konfirmasi Modal body -->
+                                        <div class="modal-body">
+                                        @if ($pesanans->status !== 'Dikonfirmasi')
+                                            <form method="post" action="{{ route('pesanan.konfirmasi', $pesanans->idPesanan) }}">
+                                            @csrf
                                             <div class="modal-body">
-                                                @if ($pesanans->status !== 'Dikonfirmasi')
-                                                <form method="post" action="{{ route('pesanan.konfirmasi', $pesanans->idPesanan) }}">
-                                                    @csrf
-                                                    <div class="modal-body">
-                                                        <p style="margin-bottom: 5px">Apakah anda yakin ingin mengkonfirmasi pesanan ini? </p>
-                                                            <span class="text-danger" style="display: block; margin-bottom: 15px;" >(Setelah Dikonfirmasi pesanan tidak dapat dibatalkan)</span>
-                                                        <button a type="submit" class="btn btn-success"
-                                                            name="konfirmasiPesanan">Konfirmasi
-                                                        </button>
-                                                </form>
-                                                @else
-                                                <button class="btn btn-secondary" disabled>Sudah Dikonfirmasi</button>
-                                                @endif
-                                            </div>
+                                                <p style="margin-bottom: 5px">Apakah anda yakin ingin mengkonfirmasi pesanan ini? </p>
+                                                    <span class="text-danger" style="display: block; margin-bottom: 15px;" >(Setelah Dikonfirmasi pesanan tidak dapat dibatalkan)</span>
+                                                    <button a type="submit" class="btn btn-success" name="konfirmasiPesanan">Konfirmasi
+                                                    </button>
+                                            </form>
+                                        @else
+                                        <button class="btn btn-secondary" disabled>Sudah Dikonfirmasi</button>
+                                        @endif
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             @endforeach
                         </tbody>
                     </table>

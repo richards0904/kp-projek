@@ -17,12 +17,14 @@ class PesananController extends Controller
 {
     public function index()
     {
+        $a = 'Dikonfirmasi';
         $b = 'Sedang Diproses';
         $pesananAll = Pesanan::select('*')
             ->join('tokos', 'pesanans.idToko', '=', 'tokos.idToko')
             ->join('users', 'pesanans.idPegawai', '=', 'users.idPegawai')
-            ->where(function ($query) use ($b) {
-                $query->where('status', '=', $b);
+            ->where(function ($query) use ($a,$b) {
+                $query->where('status', '=', $a)->
+                orWhere('status', '=', $b);
             })
             ->where('users.idPegawai', Auth::user()->idPegawai)
             ->get();
@@ -65,11 +67,15 @@ class PesananController extends Controller
 
     public function editPesanan(Request $request)
     {
+    try{
         $editPesanan = Pesanan::where('idPesanan', $request->editIdPesanan)
             ->update([
                 'idToko' => $request->idToko,
             ]);
         return redirect()->route('pesanan.sales');
+    }catch(\Exception $e){
+        return redirect()->route('pesanan.sales')->with('pesan', 'Kode toko yang anda masukan tidak terdapat dalam data toko.') ;
+    }
     }
 
     public function hapusPesanan(Request $request)

@@ -78,7 +78,7 @@
                                                     @csrf
                                                     <div class="modal-body">
                                                         <input type="text" name="editNamaBarang"
-                                                            value="{{ $barangs->namaBarang }}" maxlength="25" class="form-control" required>
+                                                            value="{{ $barangs->namaBarang }}" maxlength="60" class="form-control" required>
                                                         <br>
                                                         <select name="editJenisBarang" id="editJenisBarang" class="form-select">
                                                             <option value="Kecap" {{ $barangs->jenisBarang === 'Kecap' ? 'selected' : '' }}>Kecap</option>
@@ -150,9 +150,9 @@
                     <form autocomplete="off" action="{{route('tambah.stok.post')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
-                            <input type="text" id="idBarang" name="idBarang" placeholder="Kode Barang" class="form-control" oninput="this.value = this.value.toUpperCase()" required>
+                            <input type="text" id="idBarang" name="idBarang" placeholder="Kode Barang" maxlength="25" class="form-control" oninput="this.value = this.value.toUpperCase()" required>
                             <br>
-                            <input type="text" id="namaBarang" name="namaBarang" placeholder="Nama Barang" maxlength="25"
+                            <input type="text" id="namaBarang" name="namaBarang" placeholder="Nama Barang" maxlength="60"
                                 class="form-control" required>
                             <br>
                             <select name="jenisBarang" id="jenisBarang" class="form-select">

@@ -130,7 +130,7 @@
                     <form action="{{route('detail.pesanan.tambah')}}" method="post" name="tambahDetailPesanan" autocomplete="off">
                         @csrf
                             <div class="mb-3">
-                                <input type="text" id="idBarang" name="idBarang" list="kodeBarang" placeholder="Kode Barang" class="form-select" placeholder="Ketikan Nama Barang">
+                                <input type="text" id="idBarang" name="idBarang" list="kodeBarang" placeholder="Kode Barang" class="form-select" placeholder="Ketikan Nama Barang" required>
                                 <datalist id="kodeBarang">
                                     @foreach ($stokBarangs as $barangs)
                                     <option value="{{ $barangs->idBarang }}" data-namabarang="{{ $barangs->namaBarang }}">{{ $barangs->namaBarang }}</option>

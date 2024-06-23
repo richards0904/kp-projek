@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('detail_pesanans', function (Blueprint $table) {
             $table->string('idPesanan');
-            $table->string('idBarang', 10);
+            $table->string('idBarang', 25);
             $table->integer('qtyPesanan');
             $table->integer('subTotal');
 

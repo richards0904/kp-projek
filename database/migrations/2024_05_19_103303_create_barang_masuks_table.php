@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('barang_masuks', function (Blueprint $table) {
             $table->id('idBarangMasuk');
-            $table->string('idBarang',10);
+            $table->string('idBarang',25);
             $table->date('tglMasuk')->default(DB::raw('CURRENT_TIMESTAMP'));;
             $table->integer('hargaBeli');
             $table->integer('qtyMasuk');
