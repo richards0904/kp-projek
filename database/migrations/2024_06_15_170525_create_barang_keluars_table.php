@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('barang_keluars', function (Blueprint $table) {
             $table->id('idBarangKeluar');
-            $table->string('idBarang',10);
+            $table->string('idBarang',25);
             $table->date('tglKeluar')->default(DB::raw('CURRENT_TIMESTAMP'));;
             $table->integer('qtyKeluar');
             $table->foreign('idBarang')->references('idBarang')->on('stok_barangs')->onDelete('cascade');

@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('tokos', function (Blueprint $table) {
             $table->string('idToko')->primary();
-            $table->string('namaToko', 30);
-            $table->string('alamat', 50);
+            $table->string('namaToko', 60);
+            $table->string('alamat', 60);
             $table->string('noTelp', 14);
         });
     }

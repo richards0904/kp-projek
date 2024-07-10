@@ -3,7 +3,7 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Tambah Pengguna</h1>
+                <h1 class="mt-4">Kelola Pengguna</h1>
             </div>
             <div class="card mb-4">
                 <div class="card-header">
@@ -75,15 +75,16 @@
                                                 <form method="post" action="{{route('edit.pengguna')}}">
                                                     @csrf
                                                     <div class="modal-body">
-                                                        <input type="text" id="namaPegawai" name="namaPegawai" placeholder="Nama Pegawai" maxlength="30" class="form-control" required >
+                                                        <input type="text" id="namaPegawai" name="namaPegawai" placeholder="Nama Pegawai" value="{{$admins->namaPegawai}}"  maxlength="30" class="form-control" required>
                                                         <br>
-                                                        <input type="text" id="noTelpPegawai" name="noTelpPegawai" placeholder="Nomor Telepon Pegawai" class="form-control" required >
+                                                        <input type="text" id="noTelpPegawai" name="noTelpPegawai" placeholder="Nomor Telepon Pegawai"
+                                                        value="{{$admins->noTelpPegawai}}" minlength="10" maxlength="14"  class="form-control" required >
                                                         <br>
-                                                        <input type="text" id="alamatPegawai" name="alamatPegawai" placeholder="Alamat Pegawai" class="form-control" required >
+                                                        <input type="text" id="alamatPegawai" name="alamatPegawai" placeholder="Alamat Pegawai" value="{{$admins->alamatPegawai}}" maxlength="50" class="form-control" required >
                                                         <br>
-                                                        <input type="email" id="email" name="email" placeholder="Email" class="form-control" required>
+                                                        <input type="email" id="email" name="email" placeholder="Email" value="{{$admins->email}}" class="form-control" required>
                                                         <br>
-                                                        <input type="password" id="password" name="password" placeholder="Password" class="form-control" required>
+                                                        <input type="password" id="password" name="password" placeholder="Password"  value="{{$admins->noTelpPegawai}}" class="form-control" minlength="8" required>
                                                         <br>
                                                         <select class="form-select" name="jabatan" id="jabatan">
                                                             <option value="sales" @if ($admins->jabatan == 'sales')selected
@@ -153,13 +154,13 @@
                         <div class="modal-body">
                             <input type="text" id="namaPegawai" name="namaPegawai" placeholder="Nama Pegawai" maxlength="30" class="form-control" required >
                             <br>
-                            <input type="text" id="noTelpPegawai" name="noTelpPegawai" placeholder="Nomor Telepon Pegawai" class="form-control" required >
+                            <input type="text" id="noTelpPegawai" name="noTelpPegawai" placeholder="Nomor Telepon Pegawai" minlength="10" maxlength="14" class="form-control" required >
                             <br>
-                            <input type="text" id="alamatPegawai" name="alamatPegawai" placeholder="Alamat Pegawai" class="form-control" required >
+                            <input type="text" id="alamatPegawai" name="alamatPegawai" placeholder="Alamat Pegawai" class="form-control" maxlength="50" required >
                             <br>
                             <input type="email" id="email" name="email" placeholder="Email" class="form-control" required>
                             <br>
-                            <input type="password" id="password" name="password" placeholder="Password" class="form-control" required>
+                            <input type="password" id="password" name="password" placeholder="Password" minlength="8" class="form-control" required>
                             <br>
                             <select class="form-select" name="jabatan" id="jabatan">
                                 <option value="sales" selected>Sales</option>

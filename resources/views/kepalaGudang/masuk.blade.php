@@ -146,7 +146,7 @@
                         @csrf
                         <div class="modal-body">
                             <div>
-                                <input type="text" id="idBarang" name="idBarang" list="kodeBarang" class="form-select" placeholder="Ketik Nama Barang" @if ($stokBarang->isEmpty()) disabled @endif>
+                                <input type="text" id="idBarang" name="idBarang" list="kodeBarang" class="form-select" placeholder="Ketik Nama Barang" @if ($stokBarang->isEmpty()) disabled @endif required>
                                 @if ($stokBarang->isEmpty())
                                     <span style="font-size: 15px; color: red">Harap masukan data barang pada tabel Stok terlebih dahulu</span>
                                 @endif

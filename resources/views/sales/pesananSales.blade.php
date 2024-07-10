@@ -28,25 +28,27 @@
                     <table id="datatablesSimple">
                         <thead>
                             <tr>
-                                <th>ID Pesanan</th>
-                                <th>Toko Pemesan</th>
-                                <th>Penginput</th>
-                                <th>Total</th>
-                                <th>Status</th>
-                                <th>Tanggal Pesan</th>
-                                <th>Aksi</th>
+                                <th class="text-center">ID Pesanan</th>
+                                <th class="text-center">Toko Pemesan</th>
+                                <th class="text-center">Penginput</th>
+                                <th class="text-center" >Total</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Tanggal Pesan</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!-- Cara menampilkan data di database ke dalam website -->
                             @foreach ($pesananAll as $pesanans)
                                 <tr>
-                                    <td>{{ $pesanans->idPesanan }}</td>
-                                    <td>{{ $pesanans->namaToko }}</td>
-                                    <td>{{ $pesanans->namaPegawai }}</td>
-                                    <td>{{ $pesanans->formatRupiah('total')}}</td>
-                                    <td>{{ $pesanans->status }}</td>
-                                    <td>{{ $pesanans->tglPesanan }}</td>
+                                    <td style="text-align: center">{{ $pesanans->idPesanan }}</td>
+                                    <td style="text-align: center">{{ $pesanans->namaToko }}</td>
+                                    <td style="text-align: center">{{ $pesanans->namaPegawai }}</td>
+                                    <td style="text-align: center">{{ $pesanans->formatRupiah('total')}}</td>
+                                    <td style="text-align: center"><div @if ($pesanans->status == 'Dikonfirmasi')
+                                        class= "text-light bg-success"
+                                        @endif class="text-dark bg-warning">{{ $pesanans->status }}</div></td>
+                                    <td style="text-align: center">{{ $pesanans->tglPesanan }}</td>
                                     <td>
                                         <div class="button-group">
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit{{ $pesanans->idPesanan }}" data-idpesanan="{{ $pesanans->idPesanan }}" data-idtoko="{{ $pesanans->idToko }}"  @if($pesanans->status == 'Dikonfirmasi') disabled @endif>
@@ -77,10 +79,10 @@
                                             </div>
                                             <!-- Edit Modal body -->
                                             <div class="modal-body">
-                                                <form method="post" action="{{ route('edit.pesanan.post')}}" autocomplete="off">
+                                                <form method="post" action="{{ route('edit.pesanan.post')}}" autocomplete="off" name="formUbahPesan">
                                                     @csrf
                                                     <div class="modal-body">
-                                                        <input type="text" id="idToko" name="idToko" list="kodeToko" class="form-select"  placeholder="Ketik Nama Toko" value="{{$pesanans->namaToko}}">
+                                                        <input type="text" id="idTokoUbah" name="idToko" list="kodeToko" class="form-select"  placeholder="Ketik Nama Toko" value="{{$pesanans->idToko}}" required>
                                                         <datalist id="kodeToko">
                                                             @foreach ($tokoAll as $tokos)
                                                                 <option value="{{ $tokos->idToko }}" data-namaToko="{{ $tokos->namaToko }}">{{ $tokos->namaToko }}</option>
@@ -145,7 +147,7 @@
                     <form autocomplete="off" action="{{route('tambah.pesanan.post')}}" method="post" enctype="multipart/form-data" name="formTambahPesan">
                         @csrf
                         <div class="modal-body">
-                            <input type="text" id="idTokoTambah" name="idToko" list="kodeToko" class="form-select"  placeholder="Ketik Nama Toko">
+                            <input type="text" id="idTokoTambah" name="idToko" list="kodeToko" class="form-select"  placeholder="Ketik Nama Toko" required>
                             <datalist id="kodeToko">
                                 @foreach ($tokoAll as $tokos)
                                     <option value="{{ $tokos->idToko }}" data-namaToko="{{ $tokos->namaToko }}">{{ $tokos->namaToko }}</option>

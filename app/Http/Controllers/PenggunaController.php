@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class PenggunaController extends Controller
 {
@@ -16,14 +17,17 @@ class PenggunaController extends Controller
 
     public function inputPengguna(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'namaPegawai' => 'required',
             'noTelpPegawai' => 'required',
             'alamatPegawai' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users,email',
             'password' => 'required',
             'jabatan' => 'required'
         ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput()->with('pesan', 'Alamat email yang anda masukan sudah pernah digunakan');
+        }
         User::create([
             'namaPegawai' => $request->namaPegawai,
             'noTelpPegawai' => $request->noTelpPegawai,
@@ -37,6 +41,19 @@ class PenggunaController extends Controller
 
     public function editPengguna(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'namaPegawai' => 'required',
+            'noTelpPegawai' => 'required',
+            'alamatPegawai' => 'required',
+            'email' => 'required|unique:users,email',
+            'password' => 'required',
+            'jabatan' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput()->with('pesan', 'Alamat email yang anda masukan sudah pernah digunakan');
+        }
+
         $editPengguna = User::where('idPegawai', $request->idPegawai)
             ->update([
                 'namaPegawai' => $request->namaPegawai,

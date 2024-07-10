@@ -24,10 +24,6 @@
                         <h5>Total: {{ $pesanan->formatRupiah('total') }}</h5>
                         <!-- Button to Open the Modal -->
                         @if($pesanan->status == 'Dikonfirmasi')
-                            <a href="{{ route('cetak.nota', $pesanan->idPesanan) }}" class="btn btn-primary">
-                                <i class="bi bi-printer" style="margin-right: 5px"></i>
-                                Cetak Nota
-                            </a>
                         @else
                             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal" name="tambahDataDetail">
                                 <i class="bi bi-plus-circle" style="margin-right: 5px"></i>
@@ -55,12 +51,16 @@
                                         <td>{{ $detail->formatRupiah('subTotal')}}</td>
                                         <td>
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                                data-bs-target="#edit{{ $detail->idBarang }}">
+                                                data-bs-target="#edit{{ $detail->idBarang }}" @if ($pesanan->status == 'Dikonfirmasi')
+                                                    disabled
+                                                @endif>
                                                 <i class="bi bi-pencil" style= "margin-right: 5px"></i>
                                                 Edit
                                             </button>
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#delete{{ $detail->idBarang }}">
+                                                data-bs-target="#delete{{ $detail->idBarang }}" @if ($pesanan->status == 'Dikonfirmasi')
+                                                disabled
+                                            @endif>
                                                 <i class="bi bi-trash3" style= "margin-right: 5px"></i>
                                                 Hapus
                                             </button>
@@ -130,7 +130,7 @@
                     <form action="{{route('detail.pesanan.tambah')}}" method="post" name="tambahDetailPesanan" autocomplete="off">
                         @csrf
                             <div class="mb-3">
-                                <input type="text" id="idBarang" name="idBarang" list="kodeBarang" placeholder="Kode Barang" class="form-select" placeholder="Ketikan Nama Barang">
+                                <input type="text" id="idBarang" name="idBarang" list="kodeBarang" placeholder="Kode Barang" class="form-select" placeholder="Ketikan Nama Barang" required>
                                 <datalist id="kodeBarang">
                                     @foreach ($stokBarangs as $barangs)
                                     <option value="{{ $barangs->idBarang }}" data-namabarang="{{ $barangs->namaBarang }}">{{ $barangs->namaBarang }}</option>
