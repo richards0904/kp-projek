@@ -21,69 +21,69 @@
                     <table id="datatablesSimple">
                         <thead>
                             <tr>
-                                <th>ID Pesanan</th>
-                                <th>Toko Pemesan</th>
-                                <th>Penginput</th>
-                                <th>Total</th>
-                                <th>Status</th>
-                                <th>Tanggal Pesan</th>
-                                <th>Aksi</th>
+                                <th class="text-center">ID Pesanan</th>
+                                <th class="text-center">Toko Pemesan</th>
+                                <th class="text-center">Penginput</th>
+                                <th class="text-center">Total</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Tanggal Pesan</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!-- Cara menampilkan data di database ke dalam website -->
-                            @foreach ($pesananAll as $pesanans)
+                            @foreach ($pesananAll as $pesanan)
                                 <tr>
-                                    <td>{{ $pesanans->idPesanan }}</td>
-                                    <td>{{ $pesanans->namaToko }}</td>
-                                    <td>{{ $pesanans->namaPegawai }}</td>
-                                    <td>{{ $pesanans->formatRupiah('total')}}</td>
-                                    <td>{{ $pesanans->status }}</td>
-                                    <td>{{ $pesanans->tglPesanan }}</td>
+                                    <td class="text-center">{{ $pesanan->idPesanan }}</td>
+                                    <td class="text-center">{{ $pesanan->namaToko }}</td>
+                                    <td class="text-center">{{ $pesanan->namaPegawai }}</td>
+                                    <td class="text-center">{{ $pesanan->formatRupiah('total')}}</td>
+                                    <td class="text-center"><div @if ($pesanan->status == 'Dikonfirmasi')
+                                        class= "text-light bg-success"
+                                        @endif class="text-dark bg-warning">{{ $pesanan->status }}</div>
+                                    </td>
+                                    <td class="text-center">{{ $pesanan->tglPesanan }}</td>
                                     <td>
                                         <div class="button-group">
                                             <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                                data-bs-target="#konfirmasi{{ $pesanans->idPesanan }}"@if($pesanans->status == 'Dikonfirmasi' || $pesanans->total == 0) disabled @endif>
+                                                data-bs-target="#konfirmasi{{ $pesanan->idPesanan }}"@if($pesanan->status == 'Dikonfirmasi' || $pesanan->total == 0) disabled @endif>
                                                 <i class="bi bi-check-square" style="margin-right: 5px"></i>
                                                 Konfirmasi
                                             </button>
-                                            <a href="{{ route('detail.admin', $pesanans->idPesanan) }}" class="btn btn-info">
-                                                <i class="bi bi-eye" style="margin-right: 5px"></i>
+                                            <a href="{{ route('detail.admin', $pesanan->idPesanan) }}" class="btn btn-info">
+                                                <i class="bi bi-eye" style="margin-right: 5px;"></i>
                                                 Detail
                                             </a>
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
-                            <!-- Konfirmasi Modal -->
-                            @foreach ($pesananAll as $pesanans)
-                                <div class="modal fade" id="konfirmasi{{ $pesanans->idPesanan }}">
+                                <!-- Konfirmasi Modal -->
+                                <div class="modal fade" id="konfirmasi{{ $pesanan->idPesanan }}">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                            <!-- Konfirmasi Modal Header -->
+                                        <!-- Konfirmasi Modal Header -->
                                             <div class="modal-header">
                                                 <h4 class="modal-title">Konfirmasi Pesanan?</h4>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                             </div>
                                             <!-- Konfirmasi Modal body -->
+                                        <div class="modal-body">
+                                        @if ($pesanan->status !== 'Dikonfirmasi')
+                                            <form method="post" action="{{ route('pesanan.konfirmasi', $pesanan->idPesanan) }}">
+                                            @csrf
                                             <div class="modal-body">
-                                                @if ($pesanans->status !== 'Dikonfirmasi')
-                                                <form method="post" action="{{ route('pesanan.konfirmasi', $pesanans->idPesanan) }}">
-                                                    @csrf
-                                                    <div class="modal-body">
-                                                        <p style="margin-bottom: 5px">Apakah anda yakin ingin mengkonfirmasi pesanan ini? </p>
-                                                            <span class="text-danger" style="display: block; margin-bottom: 15px;" >(Setelah Dikonfirmasi pesanan tidak dapat dibatalkan)</span>
-                                                        <button a type="submit" class="btn btn-success"
-                                                            name="konfirmasiPesanan">Konfirmasi
-                                                        </button>
-                                                </form>
-                                                @else
-                                                <button class="btn btn-secondary" disabled>Sudah Dikonfirmasi</button>
-                                                @endif
-                                            </div>
+                                                <p style="margin-bottom: 5px">Apakah anda yakin ingin mengkonfirmasi pesanan ini? </p>
+                                                    <span class="text-danger" style="display: block; margin-bottom: 15px;" >(Setelah Dikonfirmasi pesanan tidak dapat dibatalkan)</span>
+                                                    <button a type="submit" class="btn btn-success" name="konfirmasiPesanan">Konfirmasi
+                                                    </button>
+                                            </form>
+                                        @else
+                                        <button class="btn btn-secondary" disabled>Sudah Dikonfirmasi</button>
+                                        @endif
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             @endforeach
                         </tbody>
                     </table>

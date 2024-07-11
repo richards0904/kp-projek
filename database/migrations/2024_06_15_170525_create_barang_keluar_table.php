@@ -7,20 +7,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
+    /**idBarangKeluar
      * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('barang_masuks', function (Blueprint $table) {
-            $table->id('idBarangMasuk');
+        Schema::create('barang_keluar', function (Blueprint $table) {
+            $table->id('idBarangKeluar');
             $table->string('idBarang',25);
-            $table->date('tglMasuk')->default(DB::raw('CURRENT_TIMESTAMP'));;
-            $table->integer('hargaBeli');
-            $table->integer('qtyMasuk');
-            $table->foreign('idBarang')->references('idBarang')->on('stok_barangs')->onDelete('cascade');
+            $table->date('tglKeluar')->default(DB::raw('CURRENT_TIMESTAMP'));;
+            $table->integer('qtyKeluar');
+            $table->foreign('idBarang')->references('idBarang')->on('barang')->onDelete('cascade');
         });
     }
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('barang_masuks');
+        Schema::dropIfExists('barang_keluar');
     }
 };

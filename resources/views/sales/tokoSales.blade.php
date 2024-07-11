@@ -3,7 +3,7 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Data Toko</h1>
+                <h1 class="mt-4">Kelola Toko</h1>
             </div>
             <div class="card mb-4">
                 <div class="card-header">
@@ -36,20 +36,20 @@
                         </thead>
                         <tbody>
                             <!-- Cara menampilkan data di database ke dalam website -->
-                            @foreach ($dataToko as $tokos)
+                            @foreach ($dataToko as $toko)
                                 <tr>
-                                    <td>{{ $tokos->idToko }}</td>
-                                    <td>{{ $tokos->namaToko }}</td>
-                                    <td>{{ $tokos->alamat }}</td>
-                                    <td>{{ $tokos->noTelp }}</td>
+                                    <td>{{ $toko->idToko }}</td>
+                                    <td>{{ $toko->namaToko }}</td>
+                                    <td>{{ $toko->alamat }}</td>
+                                    <td>{{ $toko->noTelp }}</td>
                                     <td>
                                         <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                            data-bs-target="#edit{{ $tokos->idToko }}">
+                                            data-bs-target="#edit{{ $toko->idToko }}">
                                             <i class="bi bi-pencil" style= "margin-right: 5px"></i>
                                             Edit
                                         </button>
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#delete{{ $tokos->idToko }}">
+                                            data-bs-target="#delete{{ $toko->idToko }}">
                                             <i class="bi bi-trash3" style= "margin-right: 5px"></i>
                                             Hapus
                                         </button>
@@ -57,8 +57,8 @@
                                 </tr>
                             @endforeach
                             <!-- The Edit Modal -->
-                            @foreach ($dataToko as $tokos)
-                                <div class="modal fade" id="edit{{ $tokos->idToko }}">
+                            @foreach ($dataToko as $toko)
+                                <div class="modal fade" id="edit{{ $toko->idToko }}">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <!-- Edit Modal Header -->
@@ -72,15 +72,15 @@
                                                     @csrf
                                                     <div class="modal-body">
                                                         <input type="text" name="editNamaToko" id="editNamaToko"
-                                                            value="{{ $tokos->namaToko }}" maxlength="30" class="form-control" required>
+                                                            value="{{ $toko->namaToko }}" maxlength="60" class="form-control" required>
                                                         <br>
                                                         <input type="text" name="editAlamat" id="editAlamat"
-                                                            value="{{ $tokos->alamat }}" class="form-control" required>
+                                                            value="{{ $toko->alamat }}" maxlength="60" class="form-control" required>
                                                         <br>
                                                         <input type="text" name="editNoTelp" id="editNoTelp"
-                                                            value="{{ $tokos->noTelp }}" class="form-control" required>
+                                                            value="{{ $toko->noTelp }}"  minlength="10" maxlength="14" class="form-control" required>
                                                         <br>
-                                                        <input type="hidden" name="idToko" value="{{ $tokos->idToko }}">
+                                                        <input type="hidden" name="idToko" value="{{ $toko->idToko }}">
                                                         <button type="submit" class="btn btn-primary"
                                                             name="editDataToko">Submit</button>
                                                     </div>
@@ -91,8 +91,8 @@
                                 </div>
                             @endforeach
                             <!-- The Delete Modal -->
-                            @foreach ($dataToko as $tokos)
-                                <div class="modal fade" id="delete{{ $tokos->idToko }}">
+                            @foreach ($dataToko as $toko)
+                                <div class="modal fade" id="delete{{ $toko->idToko }}">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <!-- Delete Modal Header -->
@@ -105,9 +105,9 @@
                                                 <form method="post" action="{{route('hapus.toko.post')}}">
                                                     @csrf
                                                     <div class="modal-body">
-                                                        <p style="margin-bottom: 5px">Apakah anda yakin ingin menghapus data toko {{ $tokos->namaToko }} ?</p>
+                                                        <p style="margin-bottom: 5px">Apakah anda yakin ingin menghapus data toko {{ $toko->namaToko }} ?</p>
                                                             <span class="text-danger" style="display: block; margin-bottom: 15px" >(Setelah dihapus data yang berkaitan akan hilang dan tidak dapat dikembalikan)</span>
-                                                        <input type="hidden" name="idToko" value="{{ $tokos->idToko }}">
+                                                        <input type="hidden" name="idToko" value="{{ $toko->idToko }}">
                                                         <button a type="submit" class="btn btn-danger"
                                                             name="hapusDataToko">Hapus</button>
                                                     </div>
@@ -137,9 +137,9 @@
                     <form autocomplete="off" action="{{route('tambah.toko.post')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
-                            <input type="text" id="namaToko" name="namaToko" placeholder="Nama Toko" maxlength="30" class="form-control" required >
+                            <input type="text" id="namaToko" name="namaToko" placeholder="Nama Toko" maxlength="60" class="form-control" required >
                             <br>
-                            <input type="text" id="alamat" name="alamat" placeholder="Alamat Toko" class="form-control" required >
+                            <input type="text" id="alamat" name="alamat" placeholder="Alamat Toko" maxlength="60" class="form-control" required >
                             <br>
                             <input type="text" id="noTelp" name="noTelp" placeholder="Nomor Telepon" class="form-control" required>
                             <br>

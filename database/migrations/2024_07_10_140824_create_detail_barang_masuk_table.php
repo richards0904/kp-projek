@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tokos', function (Blueprint $table) {
-            $table->string('idToko')->primary();
-            $table->string('namaToko', 60);
-            $table->string('alamat', 60);
-            $table->string('noTelp', 14);
+        Schema::create('detail_barang_masuk', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tokos');
+        Schema::dropIfExists('detail_barang_masuk');
     }
 };

@@ -40,7 +40,7 @@
                         </a>
                         <a class="nav-link" href="{{route('pesanan.barang')}}">
                             <div class="sb-nav-link-icon"><i class="bi bi-envelope"></i></div>
-                            Kelola Pesanan
+                            Rekap Pesanan
                         </a>
                         <a class="nav-link" href="{{route('penjualan.barang')}}">
                             <div class="sb-nav-link-icon"><i class="bi bi-receipt"></i></div>

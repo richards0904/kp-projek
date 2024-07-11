@@ -11,7 +11,7 @@ class StokBarang extends Model
     use HasFactory;
     use HasFormatRupiah;
     public $timestamps = false;
-    protected $table = "stok_barangs";
+    protected $table = "barang";
     protected $primaryKey = "idBarang";
     public $incrementing = false;
     protected $keyType = 'string';

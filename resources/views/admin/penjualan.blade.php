@@ -39,27 +39,30 @@
                     <table id="datatablesSimple">
                         <thead>
                             <tr>
-                                <th>ID Pesanan</th>
-                                <th>Toko Pemesan</th>
-                                <th>Penginput</th>
-                                <th>Total</th>
-                                <th>Status</th>
-                                <th>Tanggal Pesan</th>
-                                <th>Aksi</th>
+                                <th class="text-center">ID Pesanan</th>
+                                <th class="text-center">Toko Pemesan</th>
+                                <th class="text-center">Penginput</th>
+                                <th class="text-center">Total</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Tanggal Pesan</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!-- Cara menampilkan data di database ke dalam website -->
-                            @foreach ($pesananKonfirmasi as $pesanans)
+                            @foreach ($pesananKonfirmasi as $pesanan)
                                 <tr>
-                                    <td>{{ $pesanans->idPesanan }}</td>
-                                    <td>{{ $pesanans->namaToko }}</td>
-                                    <td>{{ $pesanans->namaPegawai }}</td>
-                                    <td>{{ $pesanans->formatRupiah('total')}}</td>
-                                    <td>{{ $pesanans->status }}</td>
-                                    <td>{{ $pesanans->tglPesanan }}</td>
-                                    <td>
-                                        <a href="{{ route('detail.admin', $pesanans->idPesanan) }}" class="btn btn-info">
+                                    <td class="text-center">{{ $pesanan->idPesanan }}</td>
+                                    <td class="text-center">{{ $pesanan->namaToko }}</td>
+                                    <td class="text-center">{{ $pesanan->namaPegawai }}</td>
+                                    <td class="text-center">{{ $pesanan->formatRupiah('total')}}</td>
+                                    <td class="text-center"><div @if ($pesanan->status == 'Dikonfirmasi')
+                                        class= "text-light bg-success"
+                                        @endif class="text-dark bg-warning">{{ $pesanan->status }}</div>
+                                    </td>
+                                    <td class="text-center">{{ $pesanan->tglPesanan }}</td>
+                                    <td class="text-center">
+                                        <a href="{{ route('detail.admin', $pesanan->idPesanan) }}" class="btn btn-info">
                                         <i class="bi bi-eye" style="margin-right: 5px"></i>
                                         Detail
                                         </a>

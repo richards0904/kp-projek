@@ -60,15 +60,15 @@
         </thead>
         <tbody>
             {{ $totalSemuaPesanan = 0;}}
-            @foreach ($pesananKonfirmasi as $index => $pesanans)
+            @foreach ($pesananKonfirmasi as $index => $pesanan)
                 <tr>
                     <td>{{$index + 1 }}</td>
-                    <td>{{ $pesanans->idPesanan }}</td>
-                    <td>{{ $pesanans->tglPesanan }}</td>
-                    <td>{{ $pesanans->toko->namaToko }}</td>
-                    <td>{{ $pesanans->formatRupiah('total') }}</td>
+                    <td>{{ $pesanan->idPesanan }}</td>
+                    <td>{{ $pesanan->tglPesanan }}</td>
+                    <td>{{ $pesanan->toko->namaToko }}</td>
+                    <td>{{ $pesanan->formatRupiah('total') }}</td>
                 </tr>
-                {{$totalSemuaPesanan += $pesanans->total;}}
+                {{$totalSemuaPesanan += $pesanan->total;}}
             @endforeach
             <tr>
                 <td class="right" colspan="4"><strong>Total:</strong></td>

@@ -9,7 +9,7 @@ class Toko extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $table = "tokos";
+    protected $table = "toko";
     protected $primaryKey = "idToko";
     public $incrementing = false;
     protected $keyType = 'string';
@@ -31,7 +31,7 @@ class Toko extends Model
         $newIdNumber = (int) substr($lastId, 3) + 1;
         return 'TOK' . str_pad($newIdNumber, 4, '0', STR_PAD_LEFT);
     }
-    public function pesanans()
+    public function pesanan()
     {
         return $this->hasMany(Pesanan::class, 'idToko', 'idToko');
     }

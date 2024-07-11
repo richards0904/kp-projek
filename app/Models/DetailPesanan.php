@@ -11,7 +11,7 @@ class DetailPesanan extends Model
     use HasFactory;
     use HasFormatRupiah;
     public $timestamps = false;
-    protected $table = "detail_pesanans";
+    protected $table = "detail_pesanan";
     protected $primaryKey = ['idPesanan', 'idBarang'];
     public $incrementing = false;
     protected $fillable = ['idPesanan','idBarang','qtyPesanan','subTotal'];

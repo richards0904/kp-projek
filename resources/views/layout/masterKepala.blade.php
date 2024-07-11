@@ -40,7 +40,7 @@
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="{{route('stok.barang')}}">
                                     <div class="sb-nav-link-icon"><i class="bi bi-house-door-fill"></i></div>
-                                    Stok Barang
+                                    Barang
                                 </a>
                                 <a class="nav-link" href="{{route('barang.masuk')}}">
                                     <div class="sb-nav-link-icon"><i class="bi bi-house-add-fill"></i></div>

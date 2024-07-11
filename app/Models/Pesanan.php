@@ -12,7 +12,7 @@ class Pesanan extends Model
     use HasFormatRupiah;
 
     public $timestamps = false;
-    protected $table = "pesanans";
+    protected $table = "pesanan";
     protected $primaryKey = "idPesanan";
     public $incrementing = false;
     protected $keyType = 'string';

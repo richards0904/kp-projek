@@ -28,36 +28,38 @@
                     <table id="datatablesSimple">
                         <thead>
                             <tr>
-                                <th>ID Pesanan</th>
-                                <th>Toko Pemesan</th>
-                                <th>Penginput</th>
-                                <th>Total</th>
-                                <th>Status</th>
-                                <th>Tanggal Pesan</th>
-                                <th>Aksi</th>
+                                <th class="text-center">ID Pesanan</th>
+                                <th class="text-center">Toko Pemesan</th>
+                                <th class="text-center">Penginput</th>
+                                <th class="text-center" >Total</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Tanggal Pesan</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!-- Cara menampilkan data di database ke dalam website -->
-                            @foreach ($pesananAll as $pesanans)
+                            @foreach ($pesananAll as $pesanan)
                                 <tr>
-                                    <td>{{ $pesanans->idPesanan }}</td>
-                                    <td>{{ $pesanans->namaToko }}</td>
-                                    <td>{{ $pesanans->namaPegawai }}</td>
-                                    <td>{{ $pesanans->formatRupiah('total')}}</td>
-                                    <td>{{ $pesanans->status }}</td>
-                                    <td>{{ $pesanans->tglPesanan }}</td>
+                                    <td style="text-align: center">{{ $pesanan->idPesanan }}</td>
+                                    <td style="text-align: center">{{ $pesanan->namaToko }}</td>
+                                    <td style="text-align: center">{{ $pesanan->namaPegawai }}</td>
+                                    <td style="text-align: center">{{ $pesanan->formatRupiah('total')}}</td>
+                                    <td style="text-align: center"><div @if ($pesanan->status == 'Dikonfirmasi')
+                                        class= "text-light bg-success"
+                                        @endif class="text-dark bg-warning">{{ $pesanan->status }}</div></td>
+                                    <td style="text-align: center">{{ $pesanan->tglPesanan }}</td>
                                     <td>
                                         <div class="button-group">
-                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit{{ $pesanans->idPesanan }}" data-idpesanan="{{ $pesanans->idPesanan }}" data-idtoko="{{ $pesanans->idToko }}"  @if($pesanans->status == 'Dikonfirmasi') disabled @endif>
+                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit{{ $pesanan->idPesanan }}" data-idpesanan="{{ $pesanan->idPesanan }}" data-idtoko="{{ $pesanan->idToko }}"  @if($pesanan->status == 'Dikonfirmasi') disabled @endif>
                                                 <i class="bi bi-pencil" style="margin-right: 5px"></i> Edit
                                             </button>
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#delete{{ $pesanans->idPesanan }}"  @if($pesanans->status == 'Dikonfirmasi') disabled @endif>
+                                                data-bs-target="#delete{{ $pesanan->idPesanan }}"  @if($pesanan->status == 'Dikonfirmasi') disabled @endif>
                                                 <i class="bi bi-trash3" style= "margin-right: 5px"></i>
                                                 Hapus
                                             </button>
-                                            <a href="{{ route('detail.pesanan', $pesanans->idPesanan) }}" class="btn btn-info">
+                                            <a href="{{ route('detail.pesanan', $pesanan->idPesanan) }}" class="btn btn-info">
                                                 <i class="bi bi-eye" style="margin-right: 5px"></i>
                                                 Detail
                                             </a>
@@ -66,8 +68,8 @@
                                 </tr>
                             @endforeach
                             <!-- The Edit Modal -->
-                            @foreach ($pesananAll as $pesanans)
-                                <div class="modal fade" id="edit{{ $pesanans->idPesanan }}">
+                            @foreach ($pesananAll as $pesanan)
+                                <div class="modal fade" id="edit{{ $pesanan->idPesanan }}">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <!-- Edit Modal Header -->
@@ -77,17 +79,17 @@
                                             </div>
                                             <!-- Edit Modal body -->
                                             <div class="modal-body">
-                                                <form method="post" action="{{ route('edit.pesanan.post')}}" autocomplete="off">
+                                                <form method="post" action="{{ route('edit.pesanan.post')}}" autocomplete="off" name="formUbahPesan">
                                                     @csrf
                                                     <div class="modal-body">
-                                                        <input type="text" id="idToko" name="idToko" list="kodeToko" class="form-select"  placeholder="Ketik Nama Toko" value="{{$pesanans->namaToko}}">
+                                                        <input type="text" id="idTokoUbah" name="idToko" list="kodeToko" class="form-select"  placeholder="Ketik Nama Toko" value="{{$pesanan->idToko}}" required>
                                                         <datalist id="kodeToko">
-                                                            @foreach ($tokoAll as $tokos)
-                                                                <option value="{{ $tokos->idToko }}" data-namaToko="{{ $tokos->namaToko }}">{{ $tokos->namaToko }}</option>
+                                                            @foreach ($tokoAll as $toko)
+                                                                <option value="{{ $toko->idToko }}" data-namaToko="{{ $toko->namaToko }}">{{ $toko->namaToko }}</option>
                                                             @endforeach
                                                         </datalist>
                                                         <br>
-                                                        <input type="hidden" name="editIdPesanan" value="{{ $pesanans->idPesanan }}">
+                                                        <input type="hidden" name="editIdPesanan" value="{{ $pesanan->idPesanan }}">
                                                         <button type="submit" class="btn btn-primary"
                                                             name="editDataPesanan">Submit</button>
                                                     </div>
@@ -98,8 +100,8 @@
                                 </div>
                             @endforeach
                             <!-- The Delete Modal -->
-                            @foreach ($pesananAll as $pesanans)
-                                <div class="modal fade" id="delete{{ $pesanans->idPesanan }}">
+                            @foreach ($pesananAll as $pesanan)
+                                <div class="modal fade" id="delete{{ $pesanan->idPesanan }}">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <!-- Delete Modal Header -->
@@ -114,7 +116,7 @@
                                                     <div class="modal-body">
                                                         <p style="margin-bottom: 5px">Apakah anda yakin ingin menghapus pesanan ini? </p>
                                                             <span class="text-danger" style="display: block; margin-bottom: 15px" >(Pesanan yang dihapus tidak dapat dikembalikan)</span>
-                                                        <input type="hidden" name="idPesanan" value="{{ $pesanans->idPesanan }}">
+                                                        <input type="hidden" name="idPesanan" value="{{ $pesanan->idPesanan }}">
                                                         <button a type="submit" class="btn btn-danger"
                                                             name="hapusDataPesanan">Hapus
                                                         </button>
@@ -145,10 +147,10 @@
                     <form autocomplete="off" action="{{route('tambah.pesanan.post')}}" method="post" enctype="multipart/form-data" name="formTambahPesan">
                         @csrf
                         <div class="modal-body">
-                            <input type="text" id="idTokoTambah" name="idToko" list="kodeToko" class="form-select"  placeholder="Ketik Nama Toko">
+                            <input type="text" id="idTokoTambah" name="idToko" list="kodeToko" class="form-select"  placeholder="Ketik Nama Toko" required>
                             <datalist id="kodeToko">
-                                @foreach ($tokoAll as $tokos)
-                                    <option value="{{ $tokos->idToko }}" data-namaToko="{{ $tokos->namaToko }}">{{ $tokos->namaToko }}</option>
+                                @foreach ($tokoAll as $toko)
+                                    <option value="{{ $toko->idToko }}" data-namaToko="{{ $toko->namaToko }}">{{ $toko->namaToko }}</option>
                                 @endforeach
                             </datalist>
                             <br>

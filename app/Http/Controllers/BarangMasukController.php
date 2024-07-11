@@ -12,7 +12,7 @@ class BarangMasukController extends Controller
     public function index()
     {
         $stokBarangMasuk = BarangMasuk::select('*')
-            ->join('stok_barangs', 'barang_masuks.idBarang', '=', 'stok_barangs.idBarang')
+            ->join('barang', 'barang_masuk.idBarang', '=', 'barang.idBarang')
             ->get();
         $stokBarang = StokBarang::select('*')
             ->get();
@@ -22,7 +22,7 @@ class BarangMasukController extends Controller
     {
         $request->validate(
             [
-                'idBarang' => 'required|exists:stok_barangs,idBarang'
+                'idBarang' => 'required|exists:barang,idBarang'
             ],
             [
                 'idBarang.required' => 'Nilai Kode Barang tidak boleh kosong. Silahkan masukan data dalam Stok Barang terlebih dahulu',
@@ -91,7 +91,7 @@ class BarangMasukController extends Controller
     }
     public function tampilBarangKeluar(){
     $stokBarangKeluar = BarangKeluar::select('*')
-            ->join('stok_barangs', 'barang_keluars.idBarang', '=', 'stok_barangs.idBarang')
+            ->join('barang', 'barang_keluar.idBarang', '=', 'barang.idBarang')
             ->get();
         $stokBarang = StokBarang::select('*')
             ->get();

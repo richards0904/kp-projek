@@ -9,7 +9,7 @@ class BarangKeluar extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $table = "barang_keluars";
+    protected $table = "barang_keluar";
     protected $primaryKey = "idBarangKeluar";
     protected $fillable = ['idBarang', 'qtyKeluar'];
 }

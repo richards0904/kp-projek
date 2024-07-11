@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('detail_pesanans', function (Blueprint $table) {
+        Schema::create('detail_pesanan', function (Blueprint $table) {
             $table->string('idPesanan');
             $table->string('idBarang', 25);
             $table->integer('qtyPesanan');
@@ -21,8 +21,8 @@ return new class extends Migration
 
             $table->primary(['idPesanan', 'idBarang']);
 
-            $table->foreign('idPesanan')->references('idPesanan')->on('pesanans')->onDelete('cascade');
-            $table->foreign('idBarang')->references('idBarang')->on('stok_barangs')->onDelete('cascade');
+            $table->foreign('idPesanan')->references('idPesanan')->on('pesanan')->onDelete('cascade');
+            $table->foreign('idBarang')->references('idBarang')->on('barang')->onDelete('cascade');
         });
     }
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detail_pesanans');
+        Schema::dropIfExists('detail_pesanan');
     }
 };

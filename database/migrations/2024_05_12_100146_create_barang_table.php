@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('stok_barangs', function (Blueprint $table) {
+        Schema::create('barang', function (Blueprint $table) {
             $table->string('idBarang',25)->unique();
             $table->string('namaBarang', 60);
             $table->enum('jenisBarang', ["Kecap", "Sambal", "Tomat", "Sardine", "Terasi", "Syrup", "Ready to Drink", "NPD Product"]);
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stok_barangs');
+        Schema::dropIfExists('barang');
     }
 };
